@@ -1,0 +1,21 @@
+<?xml version="1.0"?>
+<package>
+  <name>mobrob_robin_bringup</name>
+  <version>0.0.1</version>
+  <description>The mobrob_robin_bringup package includes all the launch files to start simulations or the real robot.</description>
+
+  <maintainer email="proprentner.lukas@gmail.com">lukas</maintainer>
+  
+  <license>BSD</license>
+
+
+  <buildtool_depend>catkin</buildtool_depend>
+  
+  
+  <!-- packages in same stack -->
+  
+  <!-- external packages -->
+  
+  <export>
+  </export>
+</package>

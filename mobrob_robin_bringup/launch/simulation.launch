@@ -1,0 +1,14 @@
+<?xml version="1.0"?>
+<launch>
+
+	<include file="$(find mobrob_robin_gazebo)/launch/mobrob_arena.launch"></include>  
+  	 
+  	<!-- 
+	<include file="$(find omnirob_robin_control)/launch/all_controllers.launch"></include>
+	<include file="$(find omnirob_robin_driver)/launch/simulated_interfaces.launch"></include> 
+	<include file="$(find omnirob_robin_driver)/launch/odometry.launch"></include>  
+	
+	<include file="$(find omnirob_robin_navigation)/launch/complete_karto.launch"></include>   
+	-->
+
+</launch>

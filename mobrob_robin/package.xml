@@ -1,0 +1,27 @@
+<?xml version="1.0"?>
+<package>
+  <name>mobrob_robin</name>
+  <version>0.0.1</version>
+  <description>The mobrob_robin meta package</description>
+
+  <maintainer email="proprentner.lukas@gmail.com">lukas</maintainer>
+  
+  <license>BSD</license>
+
+
+  <buildtool_depend>catkin</buildtool_depend>
+  
+  
+  <!-- packages in same stack -->
+  <run_depend>mobrob_robin_bringup</run_depend>
+  <run_depend>dwa_spline_local_planner</run_depend>
+  
+  
+  <!-- external packages -->
+  
+
+
+  <export>
+	  <metapackage/>
+  </export>
+</package>

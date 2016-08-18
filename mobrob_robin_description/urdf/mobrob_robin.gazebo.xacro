@@ -1,0 +1,15 @@
+<?xml version="1.0"?>
+
+<robot xmlns:xacro="http://www.ros.org/wiki/xacro">
+
+  <gazebo>
+  <!-- ros_control plugin for joint commands -->
+    
+  <plugin name="gazebo_ros_controller" filename="libgazebo_ros_control.so">
+    <robotNamespace>/mobrob_robin</robotNamespace>
+  </plugin>
+    
+  </gazebo>
+  
+
+</robot>

@@ -1,0 +1,9 @@
+<?xml version="1.0"?>
+   
+<robot name="mobrob_robin" xmlns:xacro="http://ros.org/wiki/xacro">
+
+  <xacro:property name="simulated" value="1" />
+  
+  <xacro:include filename="$(find mobrob_robin_description)/robots/mobrob.urdf.xacro" />
+  
+</robot>

@@ -1,0 +1,19 @@
+<?xml version="1.0"?>
+<!--
+  The complete mobrob library of xacros for easy reference
+ -->
+<robot xmlns:xacro="http://ros.org/wiki/xacro">
+  <!-- General -->
+  <xacro:include filename="$(find mobrob_robin_description)/urdf/mobrob_robin.common.xacro"/>
+  
+  <!-- load gazebo plugins only for simulation -->
+  <xacro:if value="${simulated}">
+    <xacro:include filename="$(find mobrob_robin_description)/urdf/mobrob_robin.gazebo.xacro"/>
+  </xacro:if>  
+  <!-- Propertiers -->
+  <xacro:include filename="$(find mobrob_robin_description)/urdf/mobrob_robin.properties.xacro"/>
+  <!-- Base -->
+  <xacro:include filename="$(find mobrob_robin_description)/urdf/mobrob_robin_base/base.urdf.xacro"/>
+  
+  
+</robot>
