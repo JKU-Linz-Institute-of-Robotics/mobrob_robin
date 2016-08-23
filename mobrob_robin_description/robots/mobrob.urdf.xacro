@@ -2,9 +2,11 @@
    
 <robot name="mobrob_robin" xmlns:xacro="http://ros.org/wiki/xacro">
    
-  <xacro:include filename="$(find mobrob_robin_description)/urdf/mobrob_robin.library.xacro" />
+  <xacro:include filename="$(find mobrob_robin_description)/urdf/mobrob_robin.library.xacro" />  
 
   <!-- load the base of the robot   -->
   <xacro:base />
+  
+  <xacro:sensor_pls200 />
   
 </robot>

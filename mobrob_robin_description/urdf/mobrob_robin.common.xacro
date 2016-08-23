@@ -1,5 +1,25 @@
 <?xml version="1.0"?>
 <robot xmlns:xacro="http://www.ros.org/wiki/xacro">
 	<property name="M_PI" value="3.1415926535897931" />
+
+	<material name="Green">
+	  <color rgba="0.0 0.8 0.0 1.0"/>
+	</material>
 	
-</robot> 
+  <material name="White">
+	<color rgba="1.0 1.0 1.0 1.0"/>
+  </material>
+
+  <material name="Gray_light">
+	<color rgba="0.5 0.5 0.5 1.0"/>
+  </material>
+
+  <material name="Gray_middle">
+	<color rgba="0.3 0.3 0.3 1.0"/>
+  </material>
+
+  <material name="Gray_dark">
+	<color rgba="0.1 0.1 0.1 1.0"/>
+  </material>
+
+</robot>

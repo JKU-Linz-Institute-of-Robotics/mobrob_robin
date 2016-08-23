@@ -1,0 +1,9 @@
+<?xml version="1.0"?>
+<launch>
+    
+  <node name="mobrob_base_interface" pkg="mobrob_robin_driver" type="mobrob_base_interface" respawn="false"
+    output="screen" ns="mobrob_robin"/>  
+      
+</launch>
+
+

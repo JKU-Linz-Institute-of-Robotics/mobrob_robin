@@ -1,0 +1,61 @@
+<?xml version="1.0"?>
+
+<robot xmlns:xacro="http://ros.org/wiki/xacro">	
+	
+	<xacro:if value="${simulated}">
+		<xacro:include filename="$(find mobrob_robin_description)/urdf/sensors/pls200.gazebo.xacro"/>
+	</xacro:if>
+	
+	<xacro:macro name="sensor_pls200" params="">
+		
+	<joint name="laser_PLS200_root_joint" type="fixed">
+		<origin xyz="${laser_offset_x} ${laser_offset_y} ${laser_offset_z + base_height}" rpy="0 0 0" />
+		<parent link="base_link" />
+		<child link="laser_PLS200_root" />
+	</joint>
+
+	<link name="laser_PLS200_root">
+		<inertial>
+		  <mass value="0.01" />
+		  <origin xyz="0 0 0" />
+		  <inertia ixx="0.001" ixy="0.0" ixz="0.0"
+			iyy="0.001" iyz="0.0"
+			izz="0.001" />
+		</inertial>
+		
+		<visual>
+		  <origin rpy="0 0 0" xyz="${laser_size_x/2} 0 0"/>
+		  <geometry>
+			<mesh  scale="1 1 1" filename="package://mobrob_robin_description/meshes/bot_PLS200.dae"/>
+		  </geometry>
+		</visual>
+		
+		<collision>
+		  <origin xyz="${laser_size_x/2} 0 ${laser_size_z/2}" rpy="0 0 0" />
+		  <geometry>
+			<box size="${laser_size_x} ${laser_size_y} ${laser_size_z}"/>
+		  </geometry>
+		</collision>
+	  </link>
+	  
+	  
+	  
+	  <link name="PLS200">
+		<inertial>
+		  <mass value="0.01" />
+		  <origin xyz="0 0 0" />
+		  <inertia ixx="0.001" ixy="0.0" ixz="0.0"
+			iyy="0.001" iyz="0.0"
+			izz="0.001" />
+		</inertial>
+	  </link>
+	  
+	  <joint name="PLS200_joint" type="fixed">
+		<origin xyz="0.1 0.0 0.065" rpy="0.0 0.0 0.0" /><!--default x 0.155-->
+		<parent link="laser_PLS200_root" />
+		<child link="PLS200" />
+	  </joint>
+	  
+	 </xacro:macro>
+	  
+</robot>

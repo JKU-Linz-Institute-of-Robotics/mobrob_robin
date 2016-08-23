@@ -1,0 +1,9 @@
+<?xml version="1.0"?>
+<launch>
+	    
+  <!-- load the joint state publisher -->      
+  <rosparam command="load" file="$(find mobrob_robin_driver)/config/odometry.yaml" />
+  <node name="mobrob_odometry_publisher_simulation_only" pkg="mobrob_robin_driver" type="mobrob_odometry_publisher_simulation_only" respawn="false"
+        output="screen" ns="/mobrob_robin/driver"/>
+
+</launch>

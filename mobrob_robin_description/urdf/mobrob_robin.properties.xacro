@@ -1,5 +1,130 @@
 <?xml version="1.0"?>
-<robot xmlns:xacro="http://ros.org/wiki/xacro">
+<robot xmlns:xacro="http://ros.org/wiki/xacro">	
+  <!--                               Base Parameter                                      -->
+  
+  <property name="base_height" value="0.23" />
+  <property name="base_mass" value="40" /><!--TODO-->
+  <property name="base_ixx" value="10" /><!--TODO-->
+  <property name="base_iyy" value="10" /><!--TODO-->
+  <property name="base_izz" value="0.1" /><!--TODO-->
+  <!-- simplified box collision geometry for base_body_1 (lower part) -->
+  <property name="base_1_size_x" value="0.6" />
+  <property name="base_1_size_y" value="0.5" />
+  <property name="base_1_size_z" value="0.33" />
+  <!-- simplified box collision geometry for base_body_2 (upper part)-->
+  <property name="base_2_size_x" value="0.345" />
+  <property name="base_2_size_y" value="0.5" />
+  <property name="base_2_size_z" value="0.25" />
+  
+  <!--                               Wheel Parameter                                      -->
+  
+  <!-- all offset parameters are measured to the base_link fram. 
+        The base_frame is located at the bottom of the mobrob body in the center-->
+  
+  <property name="wheel_rf_offset_x" value="0.242" />
+  <property name="wheel_rf_offset_y" value="-0.205" />
+  <property name="wheel_rf_offset_z" value="-0.170" />
+  <property name="wheel_lb_offset_x" value="-0.242" />
+  <property name="wheel_lb_offset_y" value="0.205" />
+  <property name="wheel_lb_offset_z" value="-0.170" />
+
+  <property name="wheel_lf_offset_x" value="0.20" />
+  <property name="wheel_lf_offset_y" value="0.15" />
+  <property name="wheel_lf_offset_z" value="-0.135" />
+  <property name="wheel_rb_offset_x" value="-0.20" />
+  <property name="wheel_rb_offset_y" value="-0.15" />
+  <property name="wheel_rb_offset_z" value="-0.135" />
+
+  <property name="wheel_small_radius" value="0.06" />
+  <property name="wheel_small_length" value="0.03" />
+  <property name="wheel_small_mass" value="0.5" />
+  <property name="wheel_small_ixx" value="0.0001" />
+  <property name="wheel_small_iyy" value="0.0001" />
+  <property name="wheel_small_izz" value="0.0001" />
+  <property name="wheel_big_radius" value="0.095" />
+  <property name="wheel_big_length" value="0.04" />
+  <property name="wheel_big_mass" value="1.0" />
+  <property name="wheel_big_ixx" value="0.0001" />
+  <property name="wheel_big_iyy" value="0.001202" />
+  <property name="wheel_big_izz" value="0.0001" />
+  
+  <!--                               Sensor Parameter                                      -->
+    
+    <!--This offset parameter(to the base_link) defines the Position of the Kinect(backside, bottom, middle point)-->
+  <property name="kinect_offset_x" value="0.3" />
+  <property name="kinect_offset_y" value="0" />
+  <property name="kinect_offset_z" value="0.275" />
+    <!--This offset parameter(to the Base_arduino_platform) defines the Position of the Kinect2(backside,bottom, middle point)-->
+  <property name="kinect2_offset_x" value="-0.03" />
+  <property name="kinect2_offset_y" value="0" />
+  <property name="kinect2_offset_z" value="0.04" />
+  <!--This offset parameter(to the base_footprint) defines the Position of the Fake_Laser_Scan-->
+  <property name="fake_scan_offset_x" value="0" />
+  <property name="fake_scan_offset_y" value="0" />
+  <property name="fake_scan_offset_z" value="1.0" />
+    <!--This offset parameter defines the Position of the Laser(backside, bottom, middle point)-->
+  <property name="laser_offset_x" value="0.26" />
+  <property name="laser_offset_y" value="0" />
+  <property name="laser_offset_z" value="0.08" />
+  
+  <!-- simplified box collision geometry for kinect-->
+  <property name="kinect_size_x" value="0.07" />
+  <property name="kinect_size_y" value="0.300" />
+  <property name="kinect_size_z" value="0.07" />
+  <!-- simplified box collision geometry for base_laser-->
+  <property name="laser_size_x" value="0.16" />
+  <property name="laser_size_y" value="0.155" />
+  <property name="laser_size_z" value="0.20" />
+
+  <!--                Additional Object Parameter (additional mass)                     -->
+  
+  <property name="add_object_mass" value="0.01" />
+  <property name="add_object_ixx" value="0.001" />
+  <property name="add_object_iyy" value="0.001" />
+  <property name="add_object_izz" value="0.001" />
+  
+  <property name="add_object_offset_x" value="0.29" />
+  <property name="add_object_offset_y" value="0" /> 
+  <property name="add_object_offset_z" value="0.33" />
+  
+  <!-- simplified box collision geometry for additional object-->
+  <property name="add_object_size_x" value="0.02" />
+  <property name="add_object_size_y" value="0.02" />
+  <property name="add_object_size_z" value="0.02" />
+  
+  
+    <!--                Kinect Arduino Parameter                      --> <!--TODO-->
+  
+  <!--                Base arduino (staff)                      -->
+  <property name="base_arduino_mass" value="0.01" />
+  <property name="base_arduino_ixx" value="0.001" />
+  <property name="base_arduino_iyy" value="0.001" />
+  <property name="base_arduino_izz" value="0.001" />
+  
+  <property name="base_arduino_offset_x" value="0.07" />
+  <property name="base_arduino_offset_y" value="0" /> 
+  <property name="base_arduino_offset_z" value="1.2" />
+  
+  <!-- simplified box collision geometry for base staff of the arduino board-->
+  <property name="base_arduino_size_x" value="0.04" />
+  <property name="base_arduino_size_y" value="0.04" />
+  <property name="base_arduino_size_z" value="1.2" />
+  
+  <property name="base_arduino_platform_mass" value="0.01" />
+  <property name="base_arduino_platform_ixx" value="0.001" />
+  <property name="base_arduino_platform_iyy" value="0.001" />
+  <property name="base_arduino_platform_izz" value="0.001" />
+  
+  <property name="base_arduino_platform_offset_x" value="-0.007" />
+  <property name="base_arduino_platform_offset_y" value="0.033" /> 
+  <property name="base_arduino_platform_offset_z" value="0.02" />
+  
+  <!-- simplified box collision geometry for base staff of the arduino board-->
+  <property name="base_arduino_platform_size_x" value="0.04" />
+  <property name="base_arduino_platform_size_y" value="0.08" />
+  <property name="base_arduino_platform_size_z" value="0.003" />
+  
+  <property name="base_arduino_pitch" value="25" /><!--degree-->
   
   
 </robot>
