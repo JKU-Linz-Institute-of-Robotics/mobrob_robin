@@ -13,12 +13,13 @@
 	<include file="$(find ros_common_robin_driver)/launch/odometry.launch">
 		<arg name="driver_ns" value="mobrob_robin" />
 	</include> 
-	<!--
-	<include file="$(find omnirob_robin_navigation)/launch/complete_karto.launch"></include>   
-	-->
+	
+	<include file="$(find mobrob_robin_navigation)/launch/complete_karto.launch"></include>   	
 	
 	<node pkg="robot_state_publisher" type="robot_state_publisher" name="robot_state_publisher" ns="mobrob_robin">
 		<param name="publish_frequency" type="double" value="30.0"/>
 	</node>
+	
+	<inlcude file="$(find spline_test)/launch/spline_test.launch"></inlcude>
 
 </launch>

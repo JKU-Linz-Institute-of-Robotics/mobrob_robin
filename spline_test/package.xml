@@ -1,0 +1,19 @@
+<?xml version="1.0"?>
+<package>
+  <name>spline_test</name>
+  <version>0.0.0</version>
+  <description>The spline_test package</description>
+  <maintainer email="lukas@todo.todo">lukas</maintainer>
+  <license>TODO</license>
+  
+  
+  <buildtool_depend>catkin</buildtool_depend>
+  <build_depend>roscpp</build_depend>
+  <build_depend>ros_common_robin_bst</build_depend>
+  <run_depend>dwa_spline_local_planner</run_depend>
+  <run_depend>roscpp</run_depend>
+
+
+  <export>
+  </export>
+</package>
