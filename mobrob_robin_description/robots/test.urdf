@@ -49,11 +49,6 @@
   <!--degree-->
   <!-- Base -->
   <!-- load the base of the robot   -->
-  <link name="world"/>
-  <joint name="odom_joint" type="fixed">
-    <parent link="world"/>
-    <child link="odom"/>
-  </joint>
   <link name="odom">
     <inertial>
       <mass value="1"/>
