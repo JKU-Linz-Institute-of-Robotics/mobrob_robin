@@ -1,0 +1,32 @@
+<?xml version="1.0"?>
+<package>
+  <name>sick_pls200</name> 	
+  <version>0.0.0</version>
+  <description>
+
+     PLS200
+
+  </description>
+  <author>Lukas Proprentner</author>
+  <maintainer email="lukas@todo.todo">lukas</maintainer>
+  <license>BSD</license>
+  
+  
+  <buildtool_depend>catkin</buildtool_depend>
+  <build_depend>roscpp</build_depend>
+  <build_depend>geometry_msgs</build_depend>
+  <build_depend>sensor_msgs</build_depend>
+  <build_depend>joy</build_depend>
+  <build_depend>nav_msgs</build_depend>
+
+  <build_depend>angles</build_depend>
+  <build_depend>tf</build_depend>
+  <build_depend>laser_geometry</build_depend>
+
+
+
+
+
+</package>
+
+
