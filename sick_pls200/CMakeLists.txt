@@ -14,11 +14,8 @@ include_directories(
   include
 )
 
-#add_executable(pls200_driver src/pls200_driver.cpp)
-#target_link_libraries(pls200_driver ${catkin_LIBRARIES})
-
-add_executable(pls_node src/pls_node.cpp src/pls200_driver.cpp)
-target_link_libraries(pls_node ${catkin_LIBRARIES})
+add_executable(pls200 src/pls200.cpp)
+target_link_libraries(pls200 ${catkin_LIBRARIES})
 
 
 
