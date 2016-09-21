@@ -1,0 +1,15 @@
+<?xml version="1.0"?>
+<launch>
+
+	<!-- load hardware interface and controler here -->
+	<include file="$(find mobrob_robin_driver)/launch/real_interfaces.launch"></include>
+
+	<!-- laser scanner -->
+	<include file="$(find sick_pls200)/launch/pls200.launch"></include>
+	
+	
+	<!-- AMCL + MOVEBASE -->
+	<include file="$(find mobrob_robin_navigation)/launch/complete_amcl.launch"></include>
+	
+	
+</launch>

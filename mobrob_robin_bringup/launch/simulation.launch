@@ -14,7 +14,9 @@
 		<arg name="driver_ns" value="mobrob_robin" />
 	</include> 
 	
-<!--	<include file="$(find mobrob_robin_navigation)/launch/complete_karto.launch"></include>   	-->
+	
+	<include file="$(find mobrob_robin_navigation)/launch/complete_amcl.launch"></include>
+	
 	
 	<node pkg="robot_state_publisher" type="robot_state_publisher" name="robot_state_publisher" ns="mobrob_robin">
 		<param name="publish_frequency" type="double" value="30.0"/>

@@ -17,3 +17,7 @@ target_link_libraries(mobrob_odometry_publisher_simulation_only ${catkin_LIBRARI
 
 add_executable(mobrob_base_interface src/mobrob_base_interface.cpp)
 target_link_libraries(mobrob_base_interface ${catkin_LIBRARIES})
+
+
+add_executable(mobrob_joint_state_publisher src/mobrob_joint_state_publisher.cpp)
+target_link_libraries(mobrob_joint_state_publisher ${catkin_LIBRARIES})

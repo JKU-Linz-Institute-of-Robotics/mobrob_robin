@@ -1,0 +1,23 @@
+<?xml version="1.0"?>
+<launch>
+ 
+  <include file="$(find ros_common_robin_driver)/launch/base_interface.launch">
+		<arg name="driver_ns" value="mobrob_robin" />
+  </include> 
+
+  <arg name="urdf_file" default="$(find xacro)/xacro.py '$(find mobrob_robin_description)/robots/mobrob_robin_real.urdf.xacro'" />
+  <param name="robot_description" command="$(arg urdf_file)" />
+    
+  <!-- load the joint state publisher -->      
+  <rosparam command="load" file="$(find mobrob_robin_driver)/config/odometry.yaml" />
+  <node name="joint_state_publisher" pkg="mobrob_robin_driver" type="mobrob_joint_state_publisher" respawn="false"
+        output="screen" ns="/mobrob_robin/driver"/>
+
+  <!-- load state publisher -->
+  <node name="robot_state_publisher" pkg="robot_state_publisher" type="robot_state_publisher"
+        output="screen"/>
+       
+
+</launch>
+
+
