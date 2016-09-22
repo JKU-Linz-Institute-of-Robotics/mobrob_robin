@@ -13,36 +13,52 @@ The range data is published as a LaserScan
 #include "std_msgs/String.h"
 #include <sensor_msgs/LaserScan.h>
 #include <sick_pls200/pls200_driver.h>
+#include <signal.h>
 
 int NUM_READINGS = 361;
 int LASER_FREQUENCY = 25;
+
+SickPLS200* laser = NULL;
+
+void mySigintHandler(int sig)
+{
+  
+	if(laser != NULL){
+		laser->CloseSerial();
+	}
+
+	ros::shutdown();
+}
 
 int main(int argc, char** argv){
 	ros::init(argc, argv, "laser_scan_publisher");  
 
 	ros::NodeHandle n;
-	ros::Publisher scan_pub = n.advertise<sensor_msgs::LaserScan>("laser_front/scan", 0);  
+	
+	signal(SIGINT, mySigintHandler);
+	
+	ros::Publisher scan_pub = n.advertise<sensor_msgs::LaserScan>("laser_front/scan", 0); 
 
-	SickPLS200 laser("/dev/ttyUSB0");
+	laser = new SickPLS200("/dev/ttyUSB0");
 
-	if( laser.OpenCommunication() != 0){
+	if( laser->OpenCommunication() != 0){
 		ROS_ERROR("could not open serial");
 		return 0;
 	}	
 	
 	//laser.Set9600Baud();  only for debugging purposes	 
 
-	if (laser.StartContinuesStream() != 0){
+	if (laser->StartContinuesStream() != 0){
 		ROS_ERROR("could not start continues stream");
 		return 0;
 	}
 	
 	std::vector<uint16_t> mm_ranges;
-	ros::Rate r(60);
+	ros::Rate r(100);
 	while(n.ok()){
 		
 
-		if(laser.ReadLaserData(mm_ranges) == 0){    
+		if(laser->ReadLaserData(mm_ranges) == 0){    
 
 		ros::Time scan_time = ros::Time::now();    
 	   
@@ -67,6 +83,6 @@ int main(int argc, char** argv){
 		r.sleep(); 
 		ros::spinOnce();
 	}
-	laser.CloseSerial();
+	laser->CloseSerial();
 }
 

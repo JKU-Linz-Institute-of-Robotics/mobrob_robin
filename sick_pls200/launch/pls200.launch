@@ -1,11 +1,7 @@
 <?xml version="1.0"?>
 <launch>
 
-	<node pkg="sick_pls200" type="pls200" name="pls200" ns="mobrob_robin" output="screen" >
+	<node pkg="sick_pls200" type="pls200" name="pls200" output="screen" >
 		
 	</node>
-	
-
-	<node pkg="tf" type="static_transform_publisher" name="link1_broadcaster" args="0 0 0.1 0 0 0 1 /odom /PLS200 100" />
-
 </launch>
