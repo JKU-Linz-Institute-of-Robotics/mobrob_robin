@@ -22,8 +22,3 @@ inflation_layer:
 
 static_layer:
   enabled: true
-
-sonar_layer:
-    topics: ['/Ultrasound/Sensor0', '/Ultrasound/Sensor1', '/Ultrasound/Sensor2', '/Ultrasound/Sensor3', '/Ultrasound/Sensor4', '/Ultrasound/Sensor5', '/Ultrasound/Sensor6', '/Ultrasound/Sensor7']
-    no_readings_timeout: 1.0
-
