@@ -14,7 +14,7 @@
     <!-- global planner used instead  <rosparam file="$(find mobrob_robin_navigation)/config/navfn_global_planner_params.yaml" command="load" /> -->
     
     <!-- move base -->
-    <rosparam file="$(find dwa_spline_local_planner)/config/move_base_params.yaml" command="load" />
+    <rosparam file="$(find mobrob_robin_navigation)/config/move_base_params.yaml" command="load" />
     <remap from="cmd_vel" to="/mobrob_robin/base/drives/control/cmd_vel"/>
     
   </node>

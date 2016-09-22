@@ -1,10 +1,6 @@
 <?xml version="1.0"?>
 <launch>
  
-  <include file="$(find ros_common_robin_driver)/launch/base_interface.launch">
-		<arg name="driver_ns" value="mobrob_robin" />
-  </include> 
-
   <arg name="urdf_file" default="$(find xacro)/xacro.py '$(find mobrob_robin_description)/robots/mobrob_robin_real.urdf.xacro'" />
   <param name="robot_description" command="$(arg urdf_file)" />
     
@@ -14,8 +10,9 @@
         output="screen" ns="/mobrob_robin/driver"/>
 
   <!-- load state publisher -->
-  <node name="robot_state_publisher" pkg="robot_state_publisher" type="robot_state_publisher"
-        output="screen"/>
+	<node pkg="robot_state_publisher" type="robot_state_publisher" name="robot_state_publisher">
+		<param name="publish_frequency" type="double" value="30.0"/>
+	</node>
        
 
 </launch>

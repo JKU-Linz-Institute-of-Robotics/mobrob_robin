@@ -13,8 +13,9 @@
                 <param name="frame_id" value="/map"/>
         </node>
 
-        <!-- start move base -->
+        <!-- start move base  -->
         <include file="$(find mobrob_robin_navigation)/launch/move_base.launch"></include>
+        
         <!--
         <node pkg="mobrob_robin_navigation" type="global_localization" name="global_localization" output="screen" />
         -->

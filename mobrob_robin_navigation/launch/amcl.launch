@@ -28,7 +28,7 @@
 			<param name="laser_likelihood_max_dist" value="2.0" />
 			
 			<!-- odom model -->
-			<param name="odom_model_type" value="omni-correct" />
+			<param name="odom_model_type" value="omni" />
 			<param name="odom_alpha1" value="0.005"/>
 			<param name="odom_alpha2" value="0.005"/>
 			<param name="odom_alpha3" value="0.010"/>
