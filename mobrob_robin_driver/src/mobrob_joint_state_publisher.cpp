@@ -29,16 +29,13 @@ double omegaz_imu = 0.0;
 
 bool no_imu_data_received = true;
 
-sensor_msgs::JointState lwa_joint_state;
-sensor_msgs::JointState pan_tilt_joint_state;
-sensor_msgs::JointState gripper_joint_state;
+
 sensor_msgs::JointState base_joint_state;
+
 nav_msgs::Odometry odom;
 
 ros::Publisher joint_state_publisher;
 ros::Publisher odometry_publisher;
-ros::Publisher base_state_ready_publisher;
-ros::Publisher base_state_fault_publisher;
 
 ros::Time current_time, last_time;
 
@@ -98,29 +95,13 @@ void base_callback( const geometry_msgs::Twist base_vel ){
 }
 
 
-
-void imu_callback( sensor_msgs::Imu data ){
-	tf::Quaternion qt;
-	tf::quaternionMsgToTF ( data.orientation, qt);
-	
-	yaw_imu = -qt.getAngle() + offset_imu;
-	omegaz_imu = -data.angular_velocity.z;
-	
-	if( no_imu_data_received ){
-		// offset callibration
-		offset_imu =  yaw0 - yaw_imu;
-		yaw_imu = yaw0;
-		no_imu_data_received = false;
-	}
-	
-}// imu callback
-
-
 int main(int argc, char **argv)
 {
   //  init node
   ros::init(argc, argv, "mobrob_joint_state_publisher");
   ros::NodeHandle n;
+  
+  ROS_INFO("joint_state_publisher_initializing");
   
   // init subscriber and msg - BASE
   std::string base_prefix = "base_";
@@ -177,15 +158,24 @@ int main(int argc, char **argv)
   }
  	
   
-  ros::Subscriber base_state_subscriber = n.subscribe( "/mobrob_robin/base/drives/state/vel", 1000, base_callback );
-  ros::Subscriber imu_subscriber = n.subscribe( "/imu/data", 1000, imu_callback );
+  ros::Subscriber base_state_subscriber = n.subscribe( "/mobrob_robin/base/drives/state/vel", 0, base_callback );
 
   // init publisher and start loop
-  joint_state_publisher = n.advertise<sensor_msgs::JointState>("/joint_states", 1000);
-  odometry_publisher = n.advertise<nav_msgs::Odometry>("/odom", 1000);
+  joint_state_publisher = n.advertise<sensor_msgs::JointState>("/joint_states", 0);
+  odometry_publisher = n.advertise<nav_msgs::Odometry>("/odom", 0);
 
+  ROS_INFO("joint_state_publisher running");
   
   current_time = ros::Time::now();
+  
+  /*
+  ros::Rate r(100);
+  
+  while(ros::ok()){
+	  ros::spinOnce();
+	  r.sleep();
+  }
+  */
   
   ros::spin();
 
