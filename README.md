@@ -19,5 +19,5 @@ Git clone the ros_common_robin stack: https://github.com/robinJKU/ros_common_rob
 
 To use slam_kart clone it from here: https://github.com/ros-perception/slam_karto
 
-To install dependencies run:
-rosdep install --from-paths WORKSPACE/src --ignore-src --rosdistro=indigo -y
+To install dependencies run (use your own catkin workspace path):
+rosdep install --from-paths ~/catkin_ws/src --ignore-src --rosdistro=indigo -y
