@@ -1,29 +1,24 @@
 #include <ros/ros.h>
 #include <geometry_msgs/Twist.h>
 #include <std_msgs/Float64.h>
+#include <std_msgs/Float64MultiArray.h>
 
 
-double x = 0.0;
-double y = 0.0;
-double yaw = 0.0;
-double vx = 0.0;
-double vy = 0.0;
-double omegaz = 0.0;
 
-ros::Time callback_time;
-ros::Time start_time;
-ros::Time stop_time;
+double phi_lf = 0.0;
+double phi_rb = 0.0;
+
+
 
 // Initialize a callback to get velocity values:
 
-void cmd_velCallback( const geometry_msgs::TwistConstPtr& cmd_vel) {
 
-  vx = cmd_vel->linear.x;
-  vy = cmd_vel->linear.y;
-  omegaz = cmd_vel->angular.z;  
- 
-  callback_time = ros::Time::now();
 
+void cmd_wheelsCallback( const std_msgs::Float64MultiArrayConstPtr& msg) {
+
+  phi_lf = msg->data[2];
+  phi_rb = msg->data[4];
+  
 }
 
 
@@ -33,12 +28,10 @@ int main( int argc, char** argv) {
   ros::init(argc, argv, "base_interface");
   
   ros::NodeHandle n;
-  ros::Subscriber sub = n.subscribe("base/cmd_vel", 1, cmd_velCallback);
+  ros::Subscriber wheels_sub = n.subscribe("base/wheels/joint_states", 1, cmd_wheelsCallback);
   
-  ros::Publisher pub_x = n.advertise<std_msgs::Float64>("base/x_position_controller/command", 50);
-  ros::Publisher pub_y = n.advertise<std_msgs::Float64>("base/y_position_controller/command", 50);
-  ros::Publisher pub_yaw = n.advertise<std_msgs::Float64>("base/yaw_position_controller/command", 50);
-  
+  ros::Publisher pub_lf = n.advertise<std_msgs::Float64>("base/lf_position_controller/command", 50);
+  ros::Publisher pub_rb = n.advertise<std_msgs::Float64>("base/rb_position_controller/command", 50); 
   
   
   ros::Time current_time, last_time;
@@ -49,29 +42,15 @@ int main( int argc, char** argv) {
   ros::Rate r(100.0);
   while (n.ok()) {
     
-      current_time = ros::Time::now();        
-
-      double dt = (current_time - last_time).toSec();
-      double delta_x = (vx * cos(yaw) - vy * sin(yaw)) * dt;
-      double delta_y = (vx * sin(yaw) + vy * cos(yaw)) * dt;
-      double delta_yaw = omegaz * dt;
-
-      x += delta_x ;
-      y += delta_y ;
-      yaw += delta_yaw;    
-    
-    
-      std_msgs::Float64 x_msg;
-      std_msgs::Float64 y_msg;
-      std_msgs::Float64 yaw_msg;
       
-      x_msg.data = x;
-      y_msg.data = y;
-      yaw_msg.data = yaw;
+      std_msgs::Float64 lf_msg;
+      std_msgs::Float64 rb_msg;
       
-      pub_x.publish(x_msg);
-      pub_y.publish(y_msg);
-      pub_yaw.publish(yaw_msg);
+      lf_msg.data = phi_lf;
+      rb_msg.data = phi_rb;
+      
+      pub_lf.publish(lf_msg);
+      pub_rb.publish(rb_msg);
 
 
       last_time = current_time;

@@ -6,6 +6,7 @@
   	 
 	<include file="$(find mobrob_robin_control)/launch/all_controllers.launch"></include>
 	
+	<include file="$(find mobrob_robin_driver)/launch/simulated_interfaces.launch"></include>	
 	
 	<include file="$(find ros_common_robin_driver)/launch/base_interface.launch">
 		<arg name="driver_ns" value="mobrob_robin" />
@@ -19,6 +20,8 @@
 	
 	
 	
+	
+	<node pkg="mobrob_robin_inverse_kin_simulation" type="mobrob_robin_inverse_kin_simulation_node" name="inverse_kin_simulation" ns="mobrob_robin"></node>
 	
 <!--	<inlcude file="$(find spline_test)/launch/spline_test.launch"></inlcude> -->
 

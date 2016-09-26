@@ -37,29 +37,8 @@
     </transmission> 
     
     
-    <!-- Wheel controllers -->
+    <!-- Wheel controllers --> 
     
-    <transmission name="tran_wheel_rf_rot_z">
-        <type>transmission_interface/SimpleTransmission</type>
-        <joint name="wheel_rf_rot_z_joint">
-          <hardwareInterface>PositionJointInterface</hardwareInterface>
-        </joint>
-        <actuator name="motor_wheel_rf_rot_z">
-		  <mechanicalReduction>1</mechanicalReduction>
-          <hardwareInterface>PositionJointInterface</hardwareInterface>          
-        </actuator>
-    </transmission>
-    
-    <transmission name="tran_wheel_lb_rot_z">
-        <type>transmission_interface/SimpleTransmission</type>
-        <joint name="wheel_lb_rot_z_joint">
-          <hardwareInterface>PositionJointInterface</hardwareInterface>
-        </joint>
-        <actuator name="motor_wheel_lb_rot_z">
-		  <mechanicalReduction>1</mechanicalReduction>
-          <hardwareInterface>PositionJointInterface</hardwareInterface>          
-        </actuator>
-    </transmission>
     
     <transmission name="tran_wheel_lf_rot_z">
         <type>transmission_interface/SimpleTransmission</type>
@@ -83,51 +62,6 @@
           <hardwareInterface>PositionJointInterface</hardwareInterface>          
         </actuator>
     </transmission>
-    
-    
-    <transmission name="tran_wheel_rf_rot_y">
-        <type>transmission_interface/SimpleTransmission</type>
-        <joint name="wheel_rf_rot_y_joint">
-          <hardwareInterface>PositionJointInterface</hardwareInterface>
-        </joint>
-        <actuator name="motor_wheel_rf_rot_y">
-		  <mechanicalReduction>1</mechanicalReduction>
-          <hardwareInterface>PositionJointInterface</hardwareInterface>          
-        </actuator>
-    </transmission>
-    
-    <transmission name="tran_wheel_lb_rot_y">
-        <type>transmission_interface/SimpleTransmission</type>
-        <joint name="wheel_lb_rot_y_joint">
-          <hardwareInterface>PositionJointInterface</hardwareInterface>
-        </joint>
-        <actuator name="motor_wheel_lb_rot_y_joint">
-		  <mechanicalReduction>1</mechanicalReduction>
-          <hardwareInterface>PositionJointInterface</hardwareInterface>          
-        </actuator>
-    </transmission>
-    
-    <transmission name="tran_wheel_lf_rot_y">
-        <type>transmission_interface/SimpleTransmission</type>
-        <joint name="wheel_lf_rot_y_joint">
-          <hardwareInterface>PositionJointInterface</hardwareInterface>
-        </joint>
-        <actuator name="motor_wheel_lf_rot_y">
-		  <mechanicalReduction>1</mechanicalReduction>
-          <hardwareInterface>PositionJointInterface</hardwareInterface>          
-        </actuator>
-    </transmission>
-    
-    <transmission name="tran_wheel_rb_rot_y">
-        <type>transmission_interface/SimpleTransmission</type>
-        <joint name="wheel_rb_rot_y_joint">
-          <hardwareInterface>PositionJointInterface</hardwareInterface>
-        </joint>
-        <actuator name="motor_wheel_rb_rot_y">
-		  <mechanicalReduction>1</mechanicalReduction>
-          <hardwareInterface>PositionJointInterface</hardwareInterface>          
-        </actuator>
-    </transmission>	
 
 </xacro:macro>
 

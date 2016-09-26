@@ -140,12 +140,10 @@
     </collision>
   </link>
   
-    <joint name="wheel_rf_rot_z_joint" type="continuous">
-    <dynamics damping="1.0" friction="0.0" />
+    <joint name="wheel_rf_rot_z_joint" type="fixed">
     <origin xyz="${wheel_rf_offset_x} ${wheel_rf_offset_y}  ${base_height}" rpy="0 0 0"/>
     <parent link="base_link"/>
     <child link="wheel_rf_rot_z"/>
-    <axis xyz="0 0 1"/>
   </joint>
 
   
@@ -176,12 +174,10 @@
     </collision>
   </link>
   
-   <joint name="wheel_lb_rot_z_joint" type="continuous">
-   <dynamics damping="1.0" friction="0.0" />
+   <joint name="wheel_lb_rot_z_joint" type="fixed">
     <origin xyz="${wheel_lb_offset_x} ${wheel_lb_offset_y} ${base_height}" rpy="0 0 0"/>
     <parent link="base_link"/>
     <child link="wheel_lb_rot_z"/>
-    <axis xyz="0 0 1"/>
   </joint>
   
   
@@ -283,12 +279,10 @@
     </collision>
   </link>
   
-   <joint name="wheel_rf_rot_y_joint" type="continuous">
-   <dynamics damping="1.0" friction="0.0" />
+   <joint name="wheel_rf_rot_y_joint" type="fixed">
     <origin xyz="0 0 ${wheel_rf_offset_z}" rpy="0 0 0"/>
     <parent link="wheel_rf_rot_z"/>
     <child link="wheel_rf_rot_y"/>
-    <axis xyz="0 1 0"/>
   </joint>
     
     
@@ -317,12 +311,10 @@
     </collision>
   </link>
   
-   <joint name="wheel_lb_rot_y_joint" type="continuous">
-   <dynamics damping="1.0" friction="0.0" />
+   <joint name="wheel_lb_rot_y_joint" type="fixed">
     <origin xyz="0 0 ${wheel_lb_offset_z}" rpy="0 0 0"/>
     <parent link="wheel_lb_rot_z"/>
     <child link="wheel_lb_rot_y"/>
-    <axis xyz="0 1 0"/>
   </joint>
   
   
@@ -351,12 +343,10 @@
     </collision>
   </link>
   
-   <joint name="wheel_lf_rot_y_joint" type="continuous">
-   <dynamics damping="1.0" friction="0.0" />
+   <joint name="wheel_lf_rot_y_joint" type="fixed">
     <origin xyz="0 0 ${wheel_lf_offset_z}" rpy="0 0 0"/>
     <parent link="wheel_lf_rot_z"/>
     <child link="wheel_lf_rot_y"/>
-    <axis xyz="0 1 0"/>
   </joint>
   
          <!--wheel right back rotation y-axis-->
@@ -384,20 +374,16 @@
     </collision>
   </link>
   
-   <joint name="wheel_rb_rot_y_joint" type="continuous">
+   <joint name="wheel_rb_rot_y_joint" type="fixed">
    <dynamics damping="1.0" friction="0.0" />
     <origin xyz="0 0 ${wheel_rb_offset_z}" rpy="0 0 0"/>
     <parent link="wheel_rb_rot_z"/>
     <child link="wheel_rb_rot_y"/>
-    <axis xyz="0 1 0"/>
   </joint>
-  
-  
+    
   <xacro:if value="${simulated}">		    	 
 	<xacro:mobrob_transmission />         
-  </xacro:if>
-      
-      
+  </xacro:if>      
       
    </xacro:macro>
 </robot>
