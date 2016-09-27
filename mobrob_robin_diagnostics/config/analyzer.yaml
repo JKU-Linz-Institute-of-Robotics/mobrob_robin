@@ -1,0 +1,13 @@
+analyzers:
+  base:
+    type: GenericAnalyzer
+    path: Base
+    startswith: base
+    num_items: 2
+    remove_prefix: base_
+  sensors:
+    type: GenericAnalyzer
+    path: Sensors
+    startswith: sensor
+    num_items: 1
+    remove_prefix: sensor_

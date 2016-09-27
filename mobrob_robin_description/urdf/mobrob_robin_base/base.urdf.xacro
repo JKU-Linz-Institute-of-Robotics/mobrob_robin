@@ -3,13 +3,13 @@
    <xacro:include filename="$(find mobrob_robin_description)/urdf/mobrob_robin_base/base.transmission.xacro" />     
    <xacro:macro name="base" params="">
       <link name="odom">
-		 <!--
+		 
          <inertial>
             <mass value="1" />
             <origin xyz="0.0 0.0 0.0" rpy="0 0 0" />
             <inertia ixx="0.1" ixy="0.0" ixz="0.0" iyy="0.1" iyz="0.0" izz="0.1" />
          </inertial>
-         -->
+         
       </link>
       <joint name="base_x_joint" type="prismatic">
          <origin xyz="0 0 0" rpy="0 0 0" />

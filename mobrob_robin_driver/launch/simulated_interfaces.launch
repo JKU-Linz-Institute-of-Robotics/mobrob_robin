@@ -7,6 +7,9 @@
 	<node pkg="robot_state_publisher" type="robot_state_publisher" name="robot_state_publisher" ns="mobrob_robin">
 		<param name="publish_frequency" type="double" value="30.0"/>
 	</node>  
+	
+	<node name="mobrob_robin_virtual_robot_driver_interface" pkg="mobrob_robin_driver" type="mobrob_robin_virtual_robot_driver_interface" respawn="false"
+    output="screen" ns="mobrob_robin"/>
       
 </launch>
 

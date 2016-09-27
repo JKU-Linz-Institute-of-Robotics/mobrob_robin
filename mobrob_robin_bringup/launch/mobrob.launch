@@ -11,5 +11,8 @@
 	<!-- AMCL + MOVEBASE -->
 	<include file="$(find mobrob_robin_navigation)/launch/complete_amcl.launch"></include>
 	
+	<!-- diagnostics -->
+	<include file="$(find mobrob_robin_diagnostics)/launch/diagnostics.launch"></include>
+	
 	
 </launch>

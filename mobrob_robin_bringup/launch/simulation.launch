@@ -19,9 +19,11 @@
 	<include file="$(find mobrob_robin_navigation)/launch/complete_amcl.launch"></include>
 	
 	
-	
-	
 	<node pkg="mobrob_robin_inverse_kin_simulation" type="mobrob_robin_inverse_kin_simulation_node" name="inverse_kin_simulation" ns="mobrob_robin"></node>
+	
+	<!-- diagnostics -->
+	<include file="$(find mobrob_robin_diagnostics)/launch/diagnostics.launch"></include>
+	
 	
 <!--	<inlcude file="$(find spline_test)/launch/spline_test.launch"></inlcude> -->
 

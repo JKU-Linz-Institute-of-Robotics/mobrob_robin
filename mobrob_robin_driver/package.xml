@@ -11,6 +11,7 @@
   <buildtool_depend>catkin</buildtool_depend>
   <build_depend>roscpp</build_depend>
   <build_depend>ros_common_robin_msgs</build_depend>  
+  <build_depend>ros_common_robin_tools</build_depend>  
   
   <run_depend>roscpp</run_depend>
   <run_depend>controller_manager</run_depend>
