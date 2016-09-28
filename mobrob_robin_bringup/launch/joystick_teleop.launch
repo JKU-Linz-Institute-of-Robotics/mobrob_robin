@@ -1,7 +1,9 @@
 <?xml version="1.0"?>
 <launch>
   <!-- mobrob_teleop_key already has its own built in velocity smoother -->
-  <node pkg="joy" type="joy_node" name="joy_node" output="screen"> </node>
+  <node pkg="joy" type="joy_node" name="joy_node" output="screen">
+	<param name="deadzone" type="double" value="0.01"></param>
+  </node>
   
   <node pkg="ros_common_robin_thrustmaster" type="teleop_joy" name="teleop_joy" output="screen">  
 	<remap from="/teleop_joy/cmd_vel" to="/mobrob_robin/base/drives/control/cmd_vel"/>
