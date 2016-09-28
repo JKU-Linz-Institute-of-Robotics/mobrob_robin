@@ -303,7 +303,7 @@ int main(int argc, char **argv) {
 	
 	// DEFINE DIAGNOSTIC MESSAGES HERE topic namespace type diag_type_to_be_published msg_typ_for_subscriber decimals_for_floats correct_value
 	//base diagnostic messages
-	diag_messages.push_back(diagnostic_message("motors_ready_and_enabled", "base/drives", "info", INFO, BOOL, 0, 1));	
+	diag_messages.push_back(diagnostic_message("motors_ready_and_enabled", "base/drives", "info", ERROR, BOOL, 0, 1));	
 	
 	for(int i = 0; i < diag_messages.size(); i++){
 		module_processors.push_back(new module_diagnostics_processor(diag_messages[i]));

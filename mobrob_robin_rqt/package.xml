@@ -16,6 +16,7 @@
   <run_depend>rqt_gui_py</run_depend>
   <run_depend>rqt_py_common</run_depend>  
   <run_depend>rospy</run_depend>
+  <run_depend>urdfdom_py</run_depend>
 
 
   <export>
