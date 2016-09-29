@@ -8,7 +8,7 @@
         <include file="$(find mobrob_robin_navigation)/launch/amcl.launch"></include>
 
         <!--start mapping nodes -->
-        <arg name="map_file" default="$(find mobrob_robin_navigation)/map/arena.yaml"/>
+        <arg name="map_file" default="$(find mobrob_robin_navigation)/map/sp1_5_stiege.yaml"/>
         <node name="map_server" pkg="map_server" type="map_server" args="$(arg map_file)" >
                 <param name="frame_id" value="/map"/>
         </node>
