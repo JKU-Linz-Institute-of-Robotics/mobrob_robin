@@ -29,7 +29,7 @@ class BASE{
 	public:
 		BASE( ros::NodeHandle handle, std::string group_name, std::string emergency_stop_topic ){
 			// state
-			drives_enabled = false;
+			drives_enabled = true;
 			
 			// advertised services
 			start_drives_service = handle.advertiseService( group_name + "/drives/control/" + "start",  &BASE::start_drives, this);
