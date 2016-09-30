@@ -49,6 +49,16 @@ void base_callback( const geometry_msgs::Twist base_vel ){
 	vy = base_vel.linear.y;
 	omegaz = base_vel.angular.z;  
 	
+	if (fabs(vx) < 0.01) {
+		vx = 0.0;
+	}
+	if (fabs(vy) < 0.01) {
+		vy = 0.0;
+	}
+	if (fabs(omegaz) < 0.01) {
+		omegaz = 0.0;
+	}
+	
 	double dt = (current_time - last_time).toSec();
     double I_vx = (vx * cos(yaw) - vy * sin(yaw));
     double I_vy = (vx * sin(yaw) + vy * cos(yaw));
