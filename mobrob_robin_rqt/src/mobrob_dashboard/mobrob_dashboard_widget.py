@@ -116,9 +116,10 @@ class MobrobDashboardWidget(QWidget):
 	
         
     @Slot()
-    def on_base_start_clicked(self):
+    def on_base_reference_clicked(self):
         self.call_service( '/mobrob_robin/base/drives/control/reference' )    
     
+    @Slot()
     def on_base_start_clicked(self):
         self.call_service( '/mobrob_robin/base/drives/control/start' )
      
