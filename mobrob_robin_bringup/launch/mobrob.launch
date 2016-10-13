@@ -7,6 +7,11 @@
 	<!-- laser scanner -->
 	<include file="$(find sick_pls200)/launch/pls200.launch"></include>
 	
+	<!--start mapping nodes -->
+	<arg name="map_file" default="$(find mobrob_robin_navigation)/map/sp1_5_stiege.yaml"/>
+	<node name="map_server" pkg="map_server" type="map_server" args="$(arg map_file)" >
+			<param name="frame_id" value="/map"/>
+	</node>
 	
 	<!-- AMCL + MOVEBASE -->
 	<include file="$(find mobrob_robin_navigation)/launch/complete_amcl.launch"></include>

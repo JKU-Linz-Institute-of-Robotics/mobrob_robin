@@ -8,8 +8,8 @@
 			<remap from="scan" to="laser_front/scan"/> 
 		
 			<!-- initial guess -->
-			<param name="initial_pose_x" value="2"/>
-			<param name="initial_pose_y" value="2"/>
+			<param name="initial_pose_x" value="1"/>
+			<param name="initial_pose_y" value="1"/>
 			<param name="initial_cov_xx" value="0.2" />
 			<param name="initial_cov_yy" value="0.2" />
 			<param name="initial_cov_aa" value="0.0685" /> <!-- 15 degree -->

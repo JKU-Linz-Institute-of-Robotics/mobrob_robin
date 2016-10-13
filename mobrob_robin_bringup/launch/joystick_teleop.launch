@@ -6,7 +6,10 @@
   </node>
   
   <node pkg="ros_common_robin_thrustmaster" type="teleop_joy" name="teleop_joy" output="screen">  
-	<remap from="/teleop_joy/cmd_vel" to="/mobrob_robin/base/drives/control/cmd_vel"/>
+	<remap from="/teleop_joy/cmd_vel" to="/mobrob_robin/raw_cmd_vel"/>
   </node>
+  
+  <include file="$(find mobrob_robin_control)/launch/velocity_smoother.launch"></include> 
+  
   
 </launch>
