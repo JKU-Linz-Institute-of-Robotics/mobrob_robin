@@ -6,6 +6,11 @@
         <node name="amcl" pkg="amcl" type="amcl" output="screen">
 			<!-- remappings -->
 			<remap from="scan" to="laser_front/scan"/> 
+			
+			<!-- update parameters -->			
+			<param name="update_min_d" value="0.1"/>
+			<param name="update_min_a" value="0.05"/>
+			<param name="resample_interval" value="1"/>
 		
 			<!-- initial guess -->
 			<param name="initial_pose_x" value="1"/>
@@ -17,10 +22,10 @@
 			<!-- laser scan model -->
 			<param name="laser_model_type" value="likelihood_field" />
 			<param name="laser_max_beams" value="60" />
-			<param name="laser_min_range" value="0.5" /> <!-- todo: check parameter -->
-			<param name="laser_max_range" value="50.0" /> <!-- todo: check parameter -->
+			<param name="laser_min_range" value="0.3" /> 
+			<param name="laser_max_range" value="30.0" />
 			<param name="laser_z_hit" value="0.95" />
-			<param name="laser_sigma_hit" value="0.1" />
+			<param name="laser_sigma_hit" value="0.0223" />
 			<param name="laser_z_short" value="0.1" />
 			<param name="laser_lambda_short" value="0.1" />
 			<param name="laser_z_max" value="0.05" />
@@ -28,8 +33,8 @@
 			<param name="laser_likelihood_max_dist" value="2.0" />
 			
 			<!-- odom model -->
-			<param name="odom_model_type" value="omni" />
-			<param name="odom_alpha1" value="0.005"/>
+			<param name="odom_model_type" value="omni-corrected" />
+			<param name="odom_alpha1" value="0.02"/>
 			<param name="odom_alpha2" value="0.005"/>
 			<param name="odom_alpha3" value="0.010"/>
 			<param name="odom_alpha4" value="0.005"/>
