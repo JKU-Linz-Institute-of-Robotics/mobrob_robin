@@ -1,9 +1,6 @@
 <?xml version="1.0"?>
 <launch>
-	<!-- start localization nodes 
-        <include file="$(find mobrob_robin_navigation)/launch/global_landmark_localization.launch"></include>
-        <include file="$(find mobrob_robin_object_detection)/launch/detect_ar_marker.launch"></include>
-     -->   
+	  
         <!--start mapping nodes -->
         <include file="$(find mobrob_robin_navigation)/launch/amcl.launch"></include>
 
@@ -11,8 +8,5 @@
         <!-- start move base  -->
         <include file="$(find mobrob_robin_navigation)/launch/move_base.launch"></include>
         
-        <!--
-        <node pkg="mobrob_robin_navigation" type="global_localization" name="global_localization" output="screen" />
-        -->
 </launch>
 
