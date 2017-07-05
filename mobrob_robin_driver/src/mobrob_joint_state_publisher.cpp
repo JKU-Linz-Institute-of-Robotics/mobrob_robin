@@ -104,6 +104,16 @@ void base_callback( const geometry_msgs::Twist base_vel ){
  	
 }
 
+void state_callback( const std_msgs::Float64MultiArray state){
+	
+	base_joint_state.position[3] = state.data[2];	
+	base_joint_state.velocity[3] = state.data[3];
+	base_joint_state.position[4] = state.data[4];
+	base_joint_state.velocity[4] = state.data[5];
+	
+}
+
+
 
 int main(int argc, char **argv)
 {
@@ -115,14 +125,16 @@ int main(int argc, char **argv)
   
   // init subscriber and msg - BASE
   std::string base_prefix = "base_";
-  base_joint_state.name.resize(3);
+  base_joint_state.name.resize(5);
   base_joint_state.name[0] = base_prefix + "x_joint";
   base_joint_state.name[1] = base_prefix + "y_joint";
   base_joint_state.name[2] = base_prefix + "yaw_joint";
+  base_joint_state.name[3] = "wheel_lf_rot_z_joint";
+  base_joint_state.name[4] = "wheel_rb_rot_z_joint";
   
-  base_joint_state.position.resize(3);
-  base_joint_state.velocity.resize(3);
-  base_joint_state.effort.resize(3);
+  base_joint_state.position.resize(5);
+  base_joint_state.velocity.resize(5);
+  base_joint_state.effort.resize(5);
   
   // read parameters
   if(  n.hasParam( "/mobrob_robin/base/odometry/x0" ) ){
@@ -169,6 +181,7 @@ int main(int argc, char **argv)
  	
   
   ros::Subscriber base_state_subscriber = n.subscribe( "/mobrob_robin/base/drives/state/vel", 0, base_callback );
+  ros::Subscriber state_subscriber = n.subscribe( "/mobrob_robin/state", 0, state_callback );
 
   // init publisher and start loop
   joint_state_publisher = n.advertise<sensor_msgs::JointState>("/joint_states", 0);
