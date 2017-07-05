@@ -55,12 +55,11 @@ int main(int argc, char** argv){
 	
 	std::vector<uint16_t> mm_ranges;
 	ros::Rate r(100);
-	while(n.ok()){
-		
+	while(n.ok()){	
 
-		if(laser->ReadLaserData(mm_ranges) == 0){    
+		if(laser->ReadLaserData(mm_ranges) == 0){   
 
-		ros::Time scan_time = ros::Time::now();    
+			ros::Time scan_time = ros::Time::now();    
 	   
 			//populate the LaserScan message
 			sensor_msgs::LaserScan scan;
@@ -76,9 +75,17 @@ int main(int argc, char** argv){
 			for(unsigned int i = 0; i < NUM_READINGS; ++i){
 			  scan.ranges.push_back(mm_ranges[i] * 10 / 1e3);
 			  scan.intensities.push_back(100);
-			}
-
+			}			
 			scan_pub.publish(scan); 
+			
+		} else {
+			ROS_ERROR("Laser is not sending data anymore");
+			ROS_INFO("Resetting Laser");
+			laser->Reset();
+			ros::Duration(2.0).sleep();
+			while (laser->StartContinuesStream() != 0){
+				ROS_ERROR("Could not start continues stream again, retrying");
+			}
 		}
 		r.sleep(); 
 		ros::spinOnce();

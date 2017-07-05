@@ -2,7 +2,7 @@
 Driver for the Sick PLS200 Laserscanner
 Functionality:
 OpenCommunication() will establish a serial connection with 500k Baud
-StartContinuesStream() will set the Operation Mode of the Laser to... conitnues streaming
+StartContinuesStream() will set the Operation Mode of the Laser to... continues streaming
 ReadLaserData() will give back 1 set of Range Data with 361 Points over 180° 
 */
 
@@ -16,6 +16,7 @@ ReadLaserData() will give back 1 set of Range Data with 361 Points over 180°
 #include <errno.h>   
 #include <termios.h> 
 #include <sys/time.h>
+#include <sys/ioctl.h>
 
 #include <sensor_msgs/LaserScan.h>
 #include <angles/angles.h>
@@ -27,7 +28,7 @@ ReadLaserData() will give back 1 set of Range Data with 361 Points over 180°
 
 
 #define MAXNDATA 802
-//#define DEBUG
+#define DEBUG
 
 
 
@@ -38,6 +39,7 @@ ReadLaserData() will give back 1 set of Range Data with 361 Points over 180°
 #define NACK    0x15
 #define SICK_STATUS 0x31
 #define CRC16_GEN_POL 0x8005
+#define BAUD    38400   //9600 500000
 
 const int CMD_BUFFER_SIZE = 255;
 
@@ -69,8 +71,11 @@ using namespace std;
 		//Advanced comm functions
 		int SendWithAswCheck(vector<uint8_t> data);
 		int CheckSerial();
+		int Reset();
 		int Login();
+		int LoginAndSetBaud();
 		int Set9600Baud();
+		int Set38kBaud();
 		int Set500kBaud();
 		int StartContinuesStream();
 		int ReadLaserData(vector<uint16_t> &ranges);     
@@ -88,6 +93,7 @@ using namespace std;
 	   
 	    ROS_INFO("Open Serial Connection");
 		this->laser_fd = ::open(this->serialport.c_str(), O_RDWR | O_SYNC , S_IRUSR | S_IWUSR );
+//		this->laser_fd = ::open(this->serialport.c_str(), O_RDWR | O_SYNC , S_IRUSR | S_IWUSR | O_NONBLOCK );
 
 		if (this->laser_fd < 0)
 		{
@@ -131,37 +137,31 @@ using namespace std;
 	void SickPLS200::CloseSerial(){
 
 		ROS_INFO("Closing Serial Connection");
-		
+		Login();
 		close(this->laser_fd);
 	}
 	
 	int SickPLS200::OpenCommunication(){
 		//try our 3 baudrates and set speed to 500k
-		ROS_INFO("Testing 500k Baud");
-		if(OpenSerial(B500000) == 0){
-			return 0;
-		}
+		//ROS_INFO("Testing 500k Baud");
+		//if(OpenSerial(B500000) == 0){			
+		//	return LoginAndSetBaud();
+		//}
 		ROS_INFO("Testing 38.4k Baud");
 		if(OpenSerial(B38400) == 0){
-			Login();
-			Set500kBaud();
-			CloseSerial();
-			if(OpenSerial(B500000) == 0){
-				return 0;
-			}
+			return LoginAndSetBaud();
 		}
 		ROS_INFO("Testing 9600 Baud");
 		if(OpenSerial(B9600) == 0){
-			Login();
-			Set500kBaud();
-			CloseSerial();
-			if(OpenSerial(B500000) == 0){
-				return 0;
-			}
-		}
-	
-	
+			return LoginAndSetBaud();
+		}			
+			return 1;
 	}	
+	
+	int SickPLS200::LoginAndSetBaud(){
+		Login();
+		return Set38kBaud();		
+	}
 	
 	int SickPLS200::CreateCRC(vector<uint8_t> data)
 	{
@@ -188,7 +188,7 @@ using namespace std;
 		#ifdef DEBUG
 			stringstream ss;
 			ss << setw(2) << setfill('0') << hex << (int) LOBYTE(uCrc16) << " " << setw(2) << setfill('0') << hex << (int) HIBYTE(uCrc16);
-			ROS_INFO("CRC test %s", ss.str().c_str());
+			//ROS_INFO("CRC test %s", ss.str().c_str());
 		#endif
 		
 		return (uCrc16);
@@ -249,6 +249,24 @@ using namespace std;
 	//Read a message from the serial port and do a CRC check
 	int SickPLS200::ReadMsg(vector<uint8_t> &msg){
 		
+		
+		int bytes_avail;
+		int timeout = 0;
+		while(1){
+			::ioctl(this->laser_fd, FIONREAD, &bytes_avail);
+			if (bytes_avail == 0){			
+				ros::Rate(10).sleep();
+				timeout++;
+				if (timeout > 20){
+					ROS_ERROR("No bytes available on serial port1");
+					return 1;
+				}
+			} else {
+				break;
+			}
+		}
+		
+		
 		uint8_t buffer[1024];
 
 		int bytes = remaining_buffer.size();
@@ -257,41 +275,70 @@ using namespace std;
 		}
 		
 		remaining_buffer.clear();
-		int new_bytes = ::read(this->laser_fd, buffer+bytes, sizeof(buffer)-bytes);
+		while(1){
+			::ioctl(this->laser_fd, FIONREAD, &bytes_avail);
+			if (bytes_avail == 0){			
+				ros::Rate(10).sleep();
+				timeout++;
+				if (timeout > 20){
+					ROS_ERROR("No bytes available on serial port2");
+					return 1;
+				}
+			} else {
+				break;
+			}
+		}
 		
+		
+		int new_bytes = ::read(this->laser_fd, buffer+bytes, sizeof(buffer)-bytes);
 		if (new_bytes < 0)
 		{
 		  if (errno == EINTR)
-		  //ROS_INFO("error on read (1)");
+		  ROS_ERROR("error on read (1)");
 		  return 1;
 		}
 		if (!new_bytes)
 		{
-		  //ROS_INFO("eof on read (1)");
+		  ROS_ERROR("eof on read (1)");
 		  return 1;
 		}
 		
 		bytes += new_bytes;
 		
 		int cnt = 0;
+		timeout = 0;		
 		while (bytes < 6) {  //when we have less bytes then header + checksum read again
+			ROS_INFO("3. bytes less then header + checksum");
+			while(1){
+				::ioctl(this->laser_fd, FIONREAD, &bytes_avail);
+				if (bytes_avail == 0){			
+					ros::Rate(10).sleep();
+					timeout++;
+					if (timeout > 20){
+						ROS_ERROR("No bytes available on serial port3");
+						return 1;
+					}
+				} else {
+					break;
+				}
+			}
 			bytes = bytes + ::read(this->laser_fd, buffer+bytes, sizeof(buffer)-bytes);
 			cnt++;
 			if(cnt == 5){
 				return 1;
 			}
-			ros::Rate(10).sleep();
+			timeout=0;
 		}
 	
 		//now we have to find the header 0x02 0x80 len_lo len_hi cmd
-		
 		int i = 0;
-		int length = 0;
+		int length = 0;		
 		while (i < bytes-1) { //search of 0x02 0x80 in the front of the message 
 			if (buffer[i] == 0x02 && buffer[i+1] == 0x80){
 				length = MAKEUINT16(buffer[i+2], buffer[i+3]); //check if length is valid
 				if(length != 3){ //short ACK message
 					if(length != 726){  //data message
+            i++;
 						continue;
 					}
 				}
@@ -305,19 +352,33 @@ using namespace std;
 			return 1;
 		}
 				
-		
 		//now shift everything to the beginning of the buffer		
 		copy(buffer+i, buffer+i+bytes, buffer);
 		bytes = bytes - i;
 		
 		int diff = length + 4 + 2 - bytes;   //length + header + crc - what we have
 		if(diff + bytes > 1024){
+			ROS_ERROR("Message length to long");
 			return 1;
 		}
-		while (diff > 0){ //we only read part of the message, lets add the rest			
+		timeout = 0;
+		while (diff > 0){ //we only read part of the message, lets add the rest
+			while(1){
+				::ioctl(this->laser_fd, FIONREAD, &bytes_avail);
+				if (bytes_avail < diff){			
+					ros::Rate(100).sleep();
+					timeout++;
+					if (timeout > 20){
+						ROS_ERROR("No bytes available on serial port4");
+						return 1;
+					}
+				} else {
+					break;
+				}
+			}			
 			bytes = bytes + ::read(this->laser_fd, buffer+bytes, diff);
 			diff = length + 4 + 2 - bytes;
-			ros::Rate(100).sleep();
+			timeout=0;
 		}
 		
 		if(bytes > 732){ //strange stuff
@@ -401,6 +462,17 @@ using namespace std;
 		return 1;
 	}
 	
+	int SickPLS200::Reset(){
+		vector<uint8_t> data;	
+		
+		data.clear();		
+		data.push_back(0x10);	
+		if(SendData(data) == 0){
+			return 0;		
+		}			
+		return 1;
+	}
+	
 	int SickPLS200::Set9600Baud(){
 		ROS_INFO("Set 9600 Baud");
 		
@@ -412,12 +484,33 @@ using namespace std;
 		data.push_back(0x20);
 		data.push_back(0x42);			
 		
-		if(SendWithAswCheck(data) == 0){	
+		if(SendWithAswCheck(data) == 0){				
 			CloseSerial();
 			if(OpenSerial(B9600) == 0){
 				ROS_INFO("9600 Baud Set");			
 				return 0;
-			}			
+			}	
+		}
+		return 1;
+	}
+
+	int SickPLS200::Set38kBaud(){
+		ROS_INFO("Set 38k Baud");
+		
+		Login();
+		
+		vector<uint8_t> data;	
+		
+		data.clear();		
+		data.push_back(0x20);
+		data.push_back(0x40);			
+		
+		if(SendWithAswCheck(data) == 0){				
+			CloseSerial();
+			if(OpenSerial(B38400) == 0){
+				ROS_INFO("38k Baud Set");			
+				return 0;
+			}		
 		}
 		return 1;
 	}	
@@ -435,7 +528,7 @@ using namespace std;
 		
 		if(SendWithAswCheck(data) == 0){				
 			CloseSerial();
-			if(OpenSerial(B9600) == 0){
+			if(OpenSerial(B500000) == 0){
 				ROS_INFO("500k Baud Set");			
 				return 0;
 			}		
@@ -464,8 +557,7 @@ using namespace std;
 	int SickPLS200::ReadLaserData(vector<uint16_t> &ranges){
 		ranges.clear();
 		vector<uint8_t> msg;
-		if (ReadMsg(msg) == 0){			
-			
+		if (ReadMsg(msg) == 0){				
 			//create the range data from the msg starting at [7]+[8] for 361 data points
 			for (int i = 7; i < 7+722; i+=2){
 				ranges.push_back(msg[i] | (msg[i+1] << 8));				
