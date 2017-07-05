@@ -16,6 +16,8 @@
   <xacro:include filename="$(find mobrob_robin_description)/urdf/mobrob_robin_base/base.urdf.xacro"/>
   <!-- Laserscanner -->
   <xacro:include filename="$(find mobrob_robin_description)/urdf/sensors/pls200.urdf.xacro"/>
+  <!-- Ultrasound -->
+  <xacro:include filename="$(find mobrob_robin_description)/urdf/sensors/ultrasound.urdf.xacro"/>
   
   
   

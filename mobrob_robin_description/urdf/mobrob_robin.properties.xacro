@@ -124,7 +124,41 @@
   <property name="base_arduino_platform_size_y" value="0.08" />
   <property name="base_arduino_platform_size_z" value="0.003" />
   
-  <property name="base_arduino_pitch" value="25" /><!--degree-->
+  <property name="base_arduino_pitch" value="25" /><!--degree-->,
+  
+  <property name="ultrasound_z" value="${0.810-0.075}"/>
+  <property name="ultrasound_back_front_y" value="${0.25-0.057}"/> <!--offset for the sensors on the side -->
+  <property name="ultrasound_back_x" value="${-0.3+0.01}" />
+  <property name="ultrasound_front_x" value="${-0.3+0.345-0.01}" />
+  <property name="ultrasound_left_right_y" value="${0.25-0.01}" />
+  <property name="ultrasound_back_side_x" value="${-0.3+0.057}" />
+  <property name="ultrasound_front_side_x" value="${-0.3+0.345-0.057}" />
+  
+  
+  <xacro:property name="ultrasound_sensor0"> <!-- lb back -->
+    <origin xyz="${ultrasound_back_x} ${ultrasound_back_front_y} ${ultrasound_z}" rpy="0 0 ${M_PI}"/>
+  </xacro:property>
+  <xacro:property name="ultrasound_sensor1"> <!-- lb left -->
+    <origin xyz="${ultrasound_back_side_x} ${ultrasound_left_right_y} ${ultrasound_z}" rpy="0 0 ${M_PI/2}"/>
+  </xacro:property>
+  <xacro:property name="ultrasound_sensor2"> <!-- lf left -->
+    <origin xyz="${ultrasound_front_side_x} ${ultrasound_left_right_y} ${ultrasound_z}" rpy="0 0 ${M_PI/2}"/>
+  </xacro:property>
+  <xacro:property name="ultrasound_sensor3"> <!-- lf front -->
+    <origin xyz="${ultrasound_front_x} ${ultrasound_back_front_y} ${ultrasound_z}" rpy="0 0 ${0}"/>
+  </xacro:property>
+  <xacro:property name="ultrasound_sensor4"> <!-- rf front -->
+    <origin xyz="${ultrasound_front_x} ${-ultrasound_back_front_y} ${ultrasound_z}" rpy="0 0 ${0}"/>
+  </xacro:property>
+  <xacro:property name="ultrasound_sensor5"> <!-- rf right -->
+    <origin xyz="${ultrasound_front_side_x} ${-ultrasound_left_right_y} ${ultrasound_z}" rpy="0 0 ${3*M_PI/2}"/>
+  </xacro:property>
+  <xacro:property name="ultrasound_sensor6"> <!-- rb right -->
+    <origin xyz="${ultrasound_back_side_x} ${-ultrasound_left_right_y} ${ultrasound_z}" rpy="0 0 ${3*M_PI/2}"/>
+  </xacro:property>
+  <xacro:property name="ultrasound_sensor7"> <!-- rb back -->
+    <origin xyz="${ultrasound_back_x} ${-ultrasound_back_front_y} ${ultrasound_z}" rpy="0 0 ${M_PI}"/>
+  </xacro:property>
   
   
 </robot>

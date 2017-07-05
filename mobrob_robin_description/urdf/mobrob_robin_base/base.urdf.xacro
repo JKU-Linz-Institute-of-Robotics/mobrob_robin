@@ -114,6 +114,12 @@
   <!--                         Wheel definition rotation z-axis                                        -->
     
   <!--wheel right front rotation z-axis-->
+  <joint name="wheel_rf_rot_z_joint" type="fixed">
+    <origin xyz="${wheel_rf_offset_x} ${wheel_rf_offset_y}  ${base_height}" rpy="0 0 0"/>
+    <parent link="base_link"/>
+    <child link="wheel_rf_rot_z"/>
+  </joint>  
+  
   <link name="wheel_rf_rot_z">
     <inertial>
       <origin xyz="0 0 0"/>
@@ -140,14 +146,17 @@
     </collision>
   </link>
   
-    <joint name="wheel_rf_rot_z_joint" type="fixed">
-    <origin xyz="${wheel_rf_offset_x} ${wheel_rf_offset_y}  ${base_height}" rpy="0 0 0"/>
-    <parent link="base_link"/>
-    <child link="wheel_rf_rot_z"/>
-  </joint>
+  
 
   
     <!--wheel left back rotation z-axis-->
+  <joint name="wheel_lb_rot_z_joint" type="fixed">
+    <origin xyz="${wheel_lb_offset_x} ${wheel_lb_offset_y} ${base_height}" rpy="0 0 0"/>
+    <parent link="base_link"/>
+    <child link="wheel_lb_rot_z"/>
+  </joint>
+    
+    
   <link name="wheel_lb_rot_z">
     <inertial>
       <origin xyz="0 0 0"/>
@@ -174,14 +183,20 @@
     </collision>
   </link>
   
-   <joint name="wheel_lb_rot_z_joint" type="fixed">
-    <origin xyz="${wheel_lb_offset_x} ${wheel_lb_offset_y} ${base_height}" rpy="0 0 0"/>
-    <parent link="base_link"/>
-    <child link="wheel_lb_rot_z"/>
-  </joint>
+   
   
   
   <!--wheel left front rotation z-axis-->
+  <joint name="wheel_lf_rot_z_joint" type="continuous">
+	<dynamics damping="1.0" friction="0.0" />
+    <origin xyz="${wheel_lf_offset_x} ${wheel_lf_offset_y} ${base_height}" rpy="0 0 0"/>
+    <parent link="base_link"/>
+    <child link="wheel_lf_rot_z"/>
+    <axis xyz="0 0 1"/>
+  </joint>
+  
+  
+  
   <link name="wheel_lf_rot_z">
     <inertial>
       <origin xyz="0 0 0"/>
@@ -208,15 +223,16 @@
     </collision>
   </link>
   
-  <joint name="wheel_lf_rot_z_joint" type="continuous">
-  <dynamics damping="1.0" friction="0.0" />
-    <origin xyz="${wheel_lf_offset_x} ${wheel_lf_offset_y} ${base_height}" rpy="0 0 0"/>
+  <!--wheel right back rotation z-axis-->
+  <joint name="wheel_rb_rot_z_joint" type="continuous">
+	<dynamics damping="1.0" friction="0.0" />
+    <origin xyz="${wheel_rb_offset_x} ${wheel_rb_offset_y} ${base_height}" rpy="0 0 0"/>
     <parent link="base_link"/>
-    <child link="wheel_lf_rot_z"/>
+    <child link="wheel_rb_rot_z"/>
     <axis xyz="0 0 1"/>
   </joint>
   
-  <!--wheel right back rotation z-axis-->
+  
   <link name="wheel_rb_rot_z">
     <inertial>
       <origin xyz="0 0 0"/>
@@ -243,18 +259,19 @@
     </collision>
   </link>
 
-  <joint name="wheel_rb_rot_z_joint" type="continuous">
-  <dynamics damping="1.0" friction="0.0" />
-    <origin xyz="${wheel_rb_offset_x} ${wheel_rb_offset_y} ${base_height}" rpy="0 0 0"/>
-    <parent link="base_link"/>
-    <child link="wheel_rb_rot_z"/>
-    <axis xyz="0 0 1"/>
-  </joint>
+  
   
   
     <!--                         Wheel definition rotation y-axis                                        -->
     
     <!--wheel right front rotation y-axis-->
+	<joint name="wheel_rf_rot_y_joint" type="fixed">
+     <origin xyz="0 0 ${wheel_rf_offset_z}" rpy="0 0 0"/>
+     <parent link="wheel_rf_rot_z"/>
+     <child link="wheel_rf_rot_y"/>
+	</joint>
+ 
+ 
     <link name="wheel_rf_rot_y">
     <inertial>
       <origin xyz="0 0 0"/>
@@ -279,14 +296,17 @@
     </collision>
   </link>
   
-   <joint name="wheel_rf_rot_y_joint" type="fixed">
-    <origin xyz="0 0 ${wheel_rf_offset_z}" rpy="0 0 0"/>
-    <parent link="wheel_rf_rot_z"/>
-    <child link="wheel_rf_rot_y"/>
-  </joint>
+   
     
     
      <!--wheel left back rotation y-axis-->
+    <joint name="wheel_lb_rot_y_joint" type="fixed">
+		<origin xyz="0 0 ${wheel_lb_offset_z}" rpy="0 0 0"/>
+		<parent link="wheel_lb_rot_z"/>
+		<child link="wheel_lb_rot_y"/>
+	</joint> 
+     
+     
     <link name="wheel_lb_rot_y">
     <inertial>
       <origin xyz="0 0 0"/>
@@ -311,14 +331,17 @@
     </collision>
   </link>
   
-   <joint name="wheel_lb_rot_y_joint" type="fixed">
-    <origin xyz="0 0 ${wheel_lb_offset_z}" rpy="0 0 0"/>
-    <parent link="wheel_lb_rot_z"/>
-    <child link="wheel_lb_rot_y"/>
-  </joint>
+   
   
   
        <!--wheel left front rotation y-axis-->
+    <joint name="wheel_lf_rot_y_joint" type="fixed">
+		<origin xyz="0 0 ${wheel_lf_offset_z}" rpy="0 0 0"/>
+		<parent link="wheel_lf_rot_z"/>
+		<child link="wheel_lf_rot_y"/>
+	</joint>
+       
+       
   <link name="wheel_lf_rot_y">
     <inertial>
       <origin xyz="0 0 0"/>
@@ -343,13 +366,16 @@
     </collision>
   </link>
   
-   <joint name="wheel_lf_rot_y_joint" type="fixed">
-    <origin xyz="0 0 ${wheel_lf_offset_z}" rpy="0 0 0"/>
-    <parent link="wheel_lf_rot_z"/>
-    <child link="wheel_lf_rot_y"/>
-  </joint>
+   
   
          <!--wheel right back rotation y-axis-->
+    <joint name="wheel_rb_rot_y_joint" type="fixed">
+		<origin xyz="0 0 ${wheel_rb_offset_z}" rpy="0 0 0"/>
+		<parent link="wheel_rb_rot_z"/>
+		<child link="wheel_rb_rot_y"/>
+	</joint>
+         
+         
   <link name="wheel_rb_rot_y">
     <inertial>
       <origin xyz="0 0 0"/>
@@ -374,12 +400,7 @@
     </collision>
   </link>
   
-   <joint name="wheel_rb_rot_y_joint" type="fixed">
-   <dynamics damping="1.0" friction="0.0" />
-    <origin xyz="0 0 ${wheel_rb_offset_z}" rpy="0 0 0"/>
-    <parent link="wheel_rb_rot_z"/>
-    <child link="wheel_rb_rot_y"/>
-  </joint>
+   
     
   <xacro:if value="${simulated}">		    	 
 	<xacro:mobrob_transmission />         
