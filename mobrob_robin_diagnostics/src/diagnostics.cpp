@@ -95,7 +95,7 @@ public:
 				publish_warning(msg, diag_msg_.topic_, diag_msg_.ns_);
 				break;
 			case ERROR:
-				publish_error(msg, diag_msg_.topic_, diag_msg_.ns_, diag_msg_.correct_val_);
+				publish_error(msg, diag_msg_.topic_, diag_msg_.ns_, diag_msg_.correct_val_, diag_msg_.decimals_);
 				break;
 		}
 	}
@@ -121,8 +121,8 @@ private:
 		publish_msg(msg, name, id, diagnostic_msgs::DiagnosticStatus::WARN, 0, 0);
 	}
 
-	void publish_error(std_msgs::Float64MultiArray msg, std::string name, std::string id, int correct_val){
-		publish_msg(msg, name, id, diagnostic_msgs::DiagnosticStatus::ERROR, correct_val, 0);
+	void publish_error(std_msgs::Float64MultiArray msg, std::string name, std::string id, int correct_val, int decimals){
+		publish_msg(msg, name, id, diagnostic_msgs::DiagnosticStatus::ERROR, correct_val, decimals);
 	}
 
 	void publish_msg(std_msgs::Float64MultiArray msg, std::string name, std::string id, int status, int correct_value, int decimals){
@@ -136,7 +136,7 @@ private:
 		std::stringstream message;
 		message << "[";
 		for(int i = 0; i < msg.data.size(); i++) {
-			if(msg.data[i] < 0.5 ^ correct_value != 1){
+			if(msg.data[i] < correct_value){
 				has_errors = true;
 			}
 			diagnostic_msgs::KeyValue key_val;
@@ -304,6 +304,7 @@ int main(int argc, char **argv) {
 	// DEFINE DIAGNOSTIC MESSAGES HERE topic namespace type diag_type_to_be_published msg_typ_for_subscriber decimals_for_floats correct_value
 	//base diagnostic messages
 	diag_messages.push_back(diagnostic_message("motors_ready_and_enabled", "base/drives", "info", ERROR, BOOL, 0, 1));	
+	diag_messages.push_back(diagnostic_message("battery_voltage", "", "info", ERROR, FLOAT, 1, 23.0));	
 	
 	for(int i = 0; i < diag_messages.size(); i++){
 		module_processors.push_back(new module_diagnostics_processor(diag_messages[i]));
