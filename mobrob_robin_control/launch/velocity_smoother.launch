@@ -5,10 +5,10 @@
   <arg name="node_name"             default="velocity_smoother"/>
   <arg name="nodelet_manager_name"  default="nodelet_manager"/>
   <arg name="config_file"           default="$(find mobrob_robin_control)/config/velocity_smoother_params.yaml"/>
-  <arg name="raw_cmd_vel_topic"     default="/mobrob_robin/raw_cmd_vel"/>
+  <arg name="raw_cmd_vel_topic"     default="/mobrob_robin/cmd_vel_ctrl"/>
   <arg name="smooth_cmd_vel_topic"  default="/mobrob_robin/base/drives/control/cmd_vel"/>
   <arg name="robot_cmd_vel_topic"   default="/mobrob_robin/base/drives/control/cmd_vel"/>
-  <arg name="odom_topic"            default="odom"/>
+  <arg name="odom_topic"            default="/odom"/>
 	
   <!-- nodelet manager -->
   <node pkg="nodelet" type="nodelet" name="$(arg nodelet_manager_name)" args="manager"/>

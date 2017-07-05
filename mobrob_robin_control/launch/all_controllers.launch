@@ -3,5 +3,7 @@
 
   <include file="$(find mobrob_robin_control)/launch/joint_states.launch"></include> 
   <include file="$(find mobrob_robin_control)/launch/base_control.launch"></include> 
+  
+  <node pkg="mobrob_robin_control" type="mobrob_robin_cmd_vel_controller" name="mobrob_robin_cmd_vel_controller"></node>
 
 </launch>
