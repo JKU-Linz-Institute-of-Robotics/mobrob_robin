@@ -1,0 +1,66 @@
+<!-- 
+  
+ -->
+<launch>
+
+
+	<arg name="base"       default="$(optenv TURTLEBOT_BASE kobuki)"/>  <!-- create, rhoomba -->
+	<arg name="stacks"     default="$(optenv TURTLEBOT_STACKS hexagons)"/>  <!-- circles, hexagons -->
+	<arg name="3d_sensor"  default="$(optenv TURTLEBOT_3D_SENSOR kinect)"/>  <!-- kinect, asus_xtion_pro -->
+	
+	<arg name="map_file"       default="$(find roomba_stage)/maps/fullMap.yaml"/> <!-- robopark_plan -->
+	<arg name="world_file"     default="$(find roomba_stage)/maps/stage/fullMap.world"/>
+	<arg name="initial_pose_x" default="0.0"/>
+	<arg name="initial_pose_y" default="0.0"/>
+	<arg name="initial_pose_a" default="0.0"/>
+  	<arg name="amcl_file" default="$(find roomba_stage)/launch/includes/amcl.launch.xml"/>
+  	<arg name="move_base_file" default="$(find turtlebot_navigation)/launch/includes/move_base.launch.xml"/>
+	<arg name="rviz_config_file" default="$(find coverage_path_plan)/rviz/robot_with_ultrasonic.rviz"/>
+  
+  	<param name="/use_sim_time" value="true"/>
+	
+	<include file="$(find roomba_robin_bringup)/launch/minimal.launch"/>
+
+<!--	<include file="$(find turtlebot_navigation)/launch/amcl_demo.launch">
+	  <arg name="map_file" value="$(arg map_file)"/>
+	</include>
+-->
+	<include file="$(find turtlebot_bringup)/launch/3dsensor.launch">
+	  <arg name="rgb_processing" value="false" />
+	  <arg name="depth_registration" value="false" />
+	  <arg name="depth_processing" value="false" />
+	  <arg name="scan_topic" value="/scan" />
+	</include>
+
+	<!--  ****** Maps *****  -->
+	<node name="map_server" pkg="map_server" type="map_server" args="$(arg map_file)">
+	  <param name="frame_id" value="/map"/>
+	</node>
+	
+	<include file="$(arg amcl_file)">
+	  <arg name="scan_topic" value="scan"/>
+	  <arg name="use_map_topic" value="true"/>
+	  <arg name="initial_pose_x" value="$(arg initial_pose_x)"/>
+	  <arg name="initial_pose_y" value="$(arg initial_pose_y)"/>
+	  <arg name="initial_pose_a" value="$(arg initial_pose_a)"/>
+	</include>
+
+	<!--  ************** Navigation  ***************  -->
+  	<include file="$(arg move_base_file)"/>
+
+
+	
+	<include file="$(find arduino_ultrasound)/launch/arduino_init.launch"/>
+
+	<include file="$(find wheeled_robin_teleop)/launch/thrustmaster_teleop.launch"/>
+
+
+
+
+	<!--  **************** Visualisation ****************  
+	<node name="rviz" pkg="rviz" type="rviz" args="-d $(arg rviz_config_file)"/>
+
+       <param name="camera/image_raw/compressed/jpeg_quality" value="8"/>
+       <node pkg="topic_tools" type="throttle" name="camera_throttle" output="screen" args="messages camera/image_raw/compressed 10 camera/rgb/image_color/compressed_throttle"/> -->
+
+</launch>
