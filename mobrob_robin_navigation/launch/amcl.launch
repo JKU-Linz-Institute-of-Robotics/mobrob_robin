@@ -8,8 +8,8 @@
 			<remap from="scan" to="laser_front/scan"/> 
 			
 			<!-- update parameters -->			
-			<param name="update_min_d" value="0.1"/>
-			<param name="update_min_a" value="0.05"/>
+			<param name="update_min_d" value="0.05"/>
+			<param name="update_min_a" value="0.01"/>
 			<param name="resample_interval" value="1"/>
 		
 			<!-- initial guess -->
@@ -34,11 +34,11 @@
 			
 			<!-- odom model -->
 			<param name="odom_model_type" value="omni-corrected" />
-			<param name="odom_alpha1" value="0.02"/>
-			<param name="odom_alpha2" value="0.005"/>
-			<param name="odom_alpha3" value="0.010"/>
-			<param name="odom_alpha4" value="0.005"/>
-			<param name="odom_alpha5" value="0.003"/>
+			<param name="odom_alpha1" value="0.1"/>
+			<param name="odom_alpha2" value="0.1"/>
+			<param name="odom_alpha3" value="0.1"/>
+			<param name="odom_alpha4" value="0.2"/>
+			<param name="odom_alpha5" value="0.1"/>
 			
 			<!-- problem complexity -->
 			<param name="min_particles" value="100" />
