@@ -144,12 +144,18 @@
   <xacro:property name="ultrasound_sensor2"> <!-- lf left -->
     <origin xyz="${ultrasound_front_side_x} ${ultrasound_left_right_y} ${ultrasound_z}" rpy="0 0 ${M_PI/2}"/>
   </xacro:property>
-  <xacro:property name="ultrasound_sensor3"> <!-- lf front -->
+  <!--
+  <xacro:property name="ultrasound_sensor3">  lf front 
     <origin xyz="${ultrasound_front_x} ${ultrasound_back_front_y} ${ultrasound_z}" rpy="0 0 ${0}"/>
   </xacro:property>
-  <xacro:property name="ultrasound_sensor4"> <!-- rf front -->
+  <xacro:property name="ultrasound_sensor4">  rf front
     <origin xyz="${ultrasound_front_x} ${-ultrasound_back_front_y} ${ultrasound_z}" rpy="0 0 ${0}"/>
   </xacro:property>
+  -->
+  <xacro:property name="ultrasound_sensor4"> <!-- middle front -->
+    <origin xyz="${ultrasound_front_x} 0.0 ${ultrasound_z}" rpy="0 0 ${0}"/>
+  </xacro:property>
+  
   <xacro:property name="ultrasound_sensor5"> <!-- rf right -->
     <origin xyz="${ultrasound_front_side_x} ${-ultrasound_left_right_y} ${ultrasound_z}" rpy="0 0 ${3*M_PI/2}"/>
   </xacro:property>

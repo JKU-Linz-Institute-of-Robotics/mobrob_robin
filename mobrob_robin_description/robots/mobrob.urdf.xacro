@@ -18,9 +18,13 @@
   <xacro:ultrasound_sensor parent="base_link" number="2">
     <insert_block name="ultrasound_sensor2" />
   </xacro:ultrasound_sensor>
+  <!-- not in use
   <xacro:ultrasound_sensor parent="base_link" number="3">
     <insert_block name="ultrasound_sensor3" />
   </xacro:ultrasound_sensor>
+  -->
+  
+  
   <xacro:ultrasound_sensor parent="base_link" number="4">
     <insert_block name="ultrasound_sensor4" />
   </xacro:ultrasound_sensor>
