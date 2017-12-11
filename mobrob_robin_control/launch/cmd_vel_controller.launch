@@ -2,8 +2,9 @@
 <launch>
   
   <node pkg="mobrob_robin_control" type="mobrob_robin_cmd_vel_controller" name="mobrob_robin_cmd_vel_controller" output="screen">
-	<remap from="/cmd_vel_raw"  to="/mobrob_robin/cmd_vel_raw"/>
-    <remap from="/cmd_vel_ctrl"       to="/mobrob_robin/base/drives/control/cmd_vel"/>  
+	<remap from="/cmd_vel_raw"  	  to="/mobrob_robin/cmd_vel_raw"/>
+    <remap from="/cmd_vel"       to="/mobrob_robin/base/drives/control/cmd_vel"/>
+    <remap from="/cmd_drives"		to="/mobrob_robin/base/drives/control/cmd_drives"/>
   </node>
 
 </launch>
