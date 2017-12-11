@@ -19,4 +19,4 @@ decel_factor: 2.0
 #  0 - none
 #  1 - odometry
 #  2 - end robot commands
-robot_feedback: 2
+robot_feedback: 1
