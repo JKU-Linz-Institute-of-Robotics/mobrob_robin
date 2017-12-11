@@ -10,11 +10,9 @@
 	<!-- ultrasound sensors -->
 	<include file="$(find mobrob_robin_ultrasound)/launch/ultrasound.launch"></include>
 	
-	<!--start mapping nodes -->
-	<arg name="map_file" default="$(find mobrob_robin_navigation)/map/fullMap.yaml"/>
-	<node name="map_server" pkg="map_server" type="map_server" args="$(arg map_file)" >
-			<param name="frame_id" value="/map"/>
-	</node>
+	
+	
+	
 	<include file="$(find ros_common_robin_clear_costmap)/launch/clear_costmap.launch"></include>
 	
 	<!-- AMCL + MOVEBASE -->
@@ -26,6 +24,7 @@
 	<!-- cmd_vel_controller -->
 	<include file="$(find mobrob_robin_control)/launch/cmd_vel_controller.launch"></include>
 	
-	
+	<!-- joystick -->
+	<include file="$(find mobrob_robin_bringup)/launch/joystick_teleop.launch"></include>
 	
 </launch>

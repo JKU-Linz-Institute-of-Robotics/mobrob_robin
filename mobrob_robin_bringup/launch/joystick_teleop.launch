@@ -6,16 +6,12 @@
   </node>
   
   <node pkg="ros_common_robin_xbox360" type="xbox360_teleop_joy" name="teleop_joy" output="screen">  
-	<remap from="/teleop_joy/cmd_vel" to="/mobrob_robin/cmd_vel_raw"/>
+	<remap from="/teleop_joy/cmd_vel" to="/mobrob_robin/cmd_vel_joy"/>
   </node>
   
   <include file="$(find mobrob_robin_control)/launch/velocity_smoother.launch"></include> 
   
-  <!-- load hardware interface and controller here -->
-  <include file="$(find mobrob_robin_driver)/launch/real_interfaces.launch"></include>
   
-  <!-- cmd_vel_controller -->
-  <include file="$(find mobrob_robin_control)/launch/cmd_vel_controller_joy.launch"></include>
   
   
 </launch>
