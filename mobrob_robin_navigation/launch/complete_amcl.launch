@@ -1,6 +1,24 @@
 <?xml version="1.0"?>
 <launch>
 	  
+		<!--start map server for move base -->
+		<arg name="map_file" default="$(find mobrob_robin_navigation)/map/fullMap.yaml"/>
+		<node name="map_server" pkg="map_server" type="map_server" args="$(arg map_file)" >
+				<param name="frame_id" value="/map"/>
+		</node>
+		
+		
+		<!--start map server for AMCL -->
+		<arg name="amcl_map_file" default="$(find mobrob_robin_navigation)/map/amcl_fullMap.yaml"/>
+		<node name="amcl_map_server" pkg="map_server" type="map_server" args="$(arg amcl_map_file)" >
+				<remap from="map" to="amcl_map" />
+				<param name="frame_id" value="/map"/>
+		</node>	
+	  
+	  
+	  
+	  
+	  
         <!--start mapping nodes -->
         <include file="$(find mobrob_robin_navigation)/launch/amcl.launch"></include>
 

@@ -1,12 +1,12 @@
 <?xml version="1.0"?>
 <launch>
   <!-- move base node -->
-  <rosparam file="$(find mobrob_robin_navigation)/config/eband_local_planner_params.yaml" command="load" />
+  
   <node pkg="move_base" type="move_base" respawn="false" name="move_base" output="screen">
     <!-- local navigation -->
     <rosparam file="$(find mobrob_robin_navigation)/config/costmap_common_params.yaml" command="load" ns="local_costmap" />
     <rosparam file="$(find mobrob_robin_navigation)/config/local_costmap_params.yaml" command="load" />
-    <rosparam file="$(find mobrob_robin_navigation)/config/eband_local_planner_params.yaml" command="load" />
+    <rosparam file="$(find mobrob_robin_navigation)/config/teb_local_planner_params.yaml" command="load" />
     
     
     <!-- global navigation -->
