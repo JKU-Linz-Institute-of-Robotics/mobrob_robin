@@ -1,7 +1,0 @@
-<library path="lib/libdwa_spline_local_planner">
-  <class name="dwa_spline_local_planner/DWASplinePlannerROS" type="dwa_spline_local_planner::DWASplinePlannerROS" base_class_type="nav_core::BaseLocalPlanner">
-    <description>
-      A implementation of a local planner using either a DWA approach based on configuration parameters publishing points for spline interpolation.
-    </description>
-  </class>
-</library>
