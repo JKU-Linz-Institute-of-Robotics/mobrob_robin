@@ -2,14 +2,14 @@
 Mobrob @ Institute of Robotics, JKU Linz
 
 mobrob_robin needs ros-gazebo5/6/7 to run the simulation.  
-Gazebo7 has been tested, read last step for upgrade instructions.<br/>
+Gazebo7 has been tested, read last step for upgrade instructions.  
 
 ## mobrob_robin installation instructions:
 
-Git clone the mobrob_robin stack: https://github.com/robinJKU/mobrob_robin<br/>
-Git clone the ros_common_robin stack: https://github.com/robinJKU/ros_common_robin<br/>
-To use slam_kart clone it from here: https://github.com/ros-perception/slam_karto<br/>
-To install dependencies run (use your own workspace path):<br/>
+Git clone the mobrob_robin stack: https://github.com/robinJKU/mobrob_robin  
+Git clone the ros_common_robin stack: https://github.com/robinJKU/ros_common_robin  
+To use slam_kart clone it from here: https://github.com/ros-perception/slam_karto  
+To install dependencies run (use your own workspace path):  
 '''
 rosdep install --from-paths ~/catkin_ws/src --ignore-src --rosdistro=indigo -y
 '''

@@ -1,5 +1,7 @@
 <?xml version="1.0"?>
 <launch>
+	
+	<!-- this launch file load all the necessary launch files to run the robot -->
 
 	<!-- load hardware interface and controller here -->
 	<include file="$(find mobrob_robin_driver)/launch/real_interfaces.launch"></include>
