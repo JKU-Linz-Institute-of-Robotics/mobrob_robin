@@ -1,4 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
+
+<!-- This maco defines the robots base body -->
+<!-- Starting from the odom frame a x y prismatic joint is added for the xy movement -->
+<!-- A yaw rotary joint follows for rotations around the z axis -->
+<!-- After that the base_link and base_upper joint define the two boxes for the body -->
+<!-- The rest of the file describes the wheel of the robot -->
+
 <robot xmlns:xacro="http://ros.org/wiki/xacro"> 
    <xacro:include filename="$(find mobrob_robin_description)/urdf/mobrob_robin_base/base.transmission.xacro" />     
    <xacro:macro name="base" params="">

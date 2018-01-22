@@ -1,13 +1,17 @@
 <?xml version="1.0"?>
+
+<!-- this xacro loads the mobrob robot urdf withouth the gazebo addons -->
    
 <robot name="mobrob_robin" xmlns:xacro="http://ros.org/wiki/xacro">
   
+  <!-- this property deactivates the simulation related macros -->
   <xacro:property name="simulated" value="0" />
   
   <xacro:property name="ofx" value="0" />
-  <xacro:property name="ofx" value="0" />
-  <xacro:property name="ofx" value="0" />
+  <xacro:property name="ofy" value="0" />
+  <xacro:property name="ofz" value="0" />
 
+  <!-- load the mobrob urdf xacro -->
   <xacro:include filename="$(find mobrob_robin_description)/robots/mobrob.urdf.xacro" /> 
   
 </robot>

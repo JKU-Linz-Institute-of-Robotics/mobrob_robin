@@ -1,5 +1,7 @@
 <?xml version="1.0"?>
 
+<!-- This file defines the Sick PLS200 visuals -->
+
 <robot xmlns:xacro="http://ros.org/wiki/xacro">	
 	
 	<xacro:if value="${simulated}">

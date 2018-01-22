@@ -1,4 +1,7 @@
 <?xml version="1.0"?>
+
+<!-- This file defines all the used parameters for the urdf model -->
+
 <robot xmlns:xacro="http://ros.org/wiki/xacro">	
   <!--                               Base Parameter                                      -->
   

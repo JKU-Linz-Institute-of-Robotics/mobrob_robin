@@ -1,4 +1,7 @@
 <?xml version="1.0"?>
+
+<!-- this file builds the mobrob urdf via xacro macros -->
+<!-- it is used for the real and simulated robot urdf model -->
    
 <robot name="mobrob_robin" xmlns:xacro="http://ros.org/wiki/xacro">
    
@@ -7,8 +10,10 @@
   <!-- load the base of the robot   -->
   <xacro:base />
   
+  <!-- load the sick pls 200 -->
   <xacro:sensor_pls200 />
   
+  <!-- load the ultrasound sensors -->
   <xacro:ultrasound_sensor parent="base_link" number="0">
     <insert_block name="ultrasound_sensor0" />
   </xacro:ultrasound_sensor>
@@ -18,13 +23,11 @@
   <xacro:ultrasound_sensor parent="base_link" number="2">
     <insert_block name="ultrasound_sensor2" />
   </xacro:ultrasound_sensor>
-  <!-- not in use
+  <!-- not in use anymore
   <xacro:ultrasound_sensor parent="base_link" number="3">
     <insert_block name="ultrasound_sensor3" />
   </xacro:ultrasound_sensor>
-  -->
-  
-  
+  --> 
   <xacro:ultrasound_sensor parent="base_link" number="4">
     <insert_block name="ultrasound_sensor4" />
   </xacro:ultrasound_sensor>

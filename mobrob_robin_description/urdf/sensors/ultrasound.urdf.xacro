@@ -1,5 +1,7 @@
 <?xml version="1.0"?>
 
+<!-- This file defines the ultrasound sensors form and color -->
+
 <robot xmlns:xacro="http://ros.org/wiki/xacro">
 	
 	<xacro:macro name="ultrasound_sensor" params="number parent *origin">

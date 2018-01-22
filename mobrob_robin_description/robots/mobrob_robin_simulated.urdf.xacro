@@ -1,5 +1,7 @@
 <?xml version="1.0"?>
    
+<!-- THE SIMULATION IS DEPRECATED -->   
+   
 <robot name="mobrob_robin" xmlns:xacro="http://ros.org/wiki/xacro">
 
   <xacro:property name="simulated" value="1" />
