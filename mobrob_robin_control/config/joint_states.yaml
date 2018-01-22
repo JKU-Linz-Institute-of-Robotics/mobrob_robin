@@ -1,3 +1,5 @@
+# this joint state publisher is only needed for the gazebo simulation
+
 mobrob_robin:
 # Publish all joint states -----------------------------------
     joint_state_controller:

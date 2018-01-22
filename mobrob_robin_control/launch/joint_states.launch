@@ -1,4 +1,7 @@
 <?xml version="1.0"?>
+
+<!-- DEPRECATED LAUNCH FILE FOR THE GAZEBO SIMULATION -->
+
 <launch>
 
   <!-- Load joint controller configurations from YAML file to parameter server -->

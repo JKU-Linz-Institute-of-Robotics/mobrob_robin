@@ -1,5 +1,11 @@
 <?xml version="1.0"?>
-<!--  ros_common_robin velocity smoother launcher  -->
+
+<!--  ros_common_robin velocity smoother launch file -->
+<!-- the velocity smoother takes the joystick output from mobrob_robin/cmd_vel_joy -->
+<!-- uses the parames from the /config/velocity_smoother_params.yaml -->
+<!-- and outputs the smoothed velocity cmd to /mobrob_robin/cmd_vel_raw -->
+<!-- cmd_vel_raw is than used by the cmd_vel_controller also found in this package -->
+
 
 <launch>
   <arg name="node_name"             default="velocity_smoother"/>

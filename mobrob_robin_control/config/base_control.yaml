@@ -1,3 +1,5 @@
+# these controllers are only relevant for the gazebo simulation, which is deprecated
+
 mobrob_robin:
   base:
     # Position Controllers ---------------------------------------

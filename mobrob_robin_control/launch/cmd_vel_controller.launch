@@ -1,9 +1,15 @@
 <?xml version="1.0"?>
+
+<!-- This launch files create the cmd_vel_controller node -->
+<!-- The node provides high level control logic for the mobrob drives -->
+<!-- The input cmd_vel_raw topic either comes from the joystick or the move_base navigation stack -->
+<!-- The output cmd_drives topic sends steering angle and wheel velocity commands to the matlab driver -->
+
+
 <launch>
   
   <node pkg="mobrob_robin_control" type="mobrob_robin_cmd_vel_controller" name="mobrob_robin_cmd_vel_controller" output="screen">
 	<remap from="/cmd_vel_raw"  	  to="/mobrob_robin/cmd_vel_raw"/>
-    <remap from="/cmd_vel"       to="/mobrob_robin/base/drives/control/cmd_vel"/>
     <remap from="/cmd_drives"		to="/mobrob_robin/base/drives/control/cmd_drives"/>
   </node>
 
